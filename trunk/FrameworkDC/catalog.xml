@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/Gustavo%20Leites/ORT/Semestre%206/Diseño%20de%20Componentes/Obligatorio/FrameworkDC/src/xmlParse/mvcDTD.dtd" uri="xml-resources/jaxb/jaxbBinding2/mvcDTD.dtd"/>
+</catalog>

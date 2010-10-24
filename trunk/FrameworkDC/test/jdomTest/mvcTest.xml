@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mvc-config SYSTEM "src/xmlParse/mvc.dtd">
+<!--
+    Document   : mvcTest.xml
+    Created on : 23 de octubre de 2010, 04:47 PM
+    Author     : Gustavo Leites
+    Description:
+        Purpose of the document follows.
+-->
+
+<mvc-config>
+    <command-mappings>
+        <command path="/Bienvenido" forwardTo="/paginas/Bienvenido.jsp"/>
+        <command path="/Login" forwardTo="/paginas/Login.jsp"/>
+
+        <command path="/LoginSubmit" type="app.LoginCommand">
+            <forward name="entrar" path="/paginas/Principal.jsp"/>
+            <forward name="error" path="/paginas/Login.jsp"/>
+        </command>
+
+        <command path="/Logout" type="app.LogoutCommand">
+            <forward name="ok" path="/paginas/Login.jsp"/>
+        </command>
+
+    </command-mappings>
+</mvc-config>
