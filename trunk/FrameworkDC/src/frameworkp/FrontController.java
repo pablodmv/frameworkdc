@@ -31,16 +31,12 @@ public class FrontController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FrontController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FrontController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            */
+            
+            String comando = obtenerComando(request.getRequestURL().toString());
+            /*/*TODO- Invocar al metodo createCommand del CommandFactory*/
+            
+
+
         } finally { 
             out.close();
         }
@@ -81,5 +77,22 @@ public class FrontController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+private String obtenerComando (String url){
+
+    String[] urlParsed = url.split("/");
+    String comandoTemp = "";
+
+    for(int i= 0; i< urlParsed.length;i++){
+        comandoTemp = urlParsed[i];
+    }
+
+    String[] comando = comandoTemp.split("\\.");
+    //System.out.println("El comando es: " + comando[0]);
+
+
+    return comando[0];
+}
+
 
 }
