@@ -29,7 +29,7 @@ public class ParseXMLFile {
     private final String ATT_NAME = "name";
     private final String TAG_CMD_MAP = "command-mappings";
 
-    private CommandMappingDTD commandMapping;
+    private CommandMappingDTD commandMapping = new CommandMappingDTD();
 
 
     public ParseXMLFile (){
@@ -45,7 +45,7 @@ public class ParseXMLFile {
     }
 
 
-    public void parsing (File xmlFile){
+    public void parsing (String xmlFile){
 
         SAXBuilder builder = new SAXBuilder (true);
         Document doc;
@@ -57,35 +57,34 @@ public class ParseXMLFile {
             root.getName ();
             Element commMappingsXML = root.getChild(this.TAG_CMD_MAP);
 
+            //Obtengo la lista de comandos
             List<Element> listaComandos = commMappingsXML.getChildren();
 
             for (int i=0; i < listaComandos.size(); i++){
 
-                //Obtengo los atributos del tag command
+                //Obtengo los atributos del comando
                 List<Attribute> listaAttr = listaComandos.get(i).getAttributes();
 
-                CommandDTD cmd = cmdAttribute(listaAttr);
+                CommandDTD cmd = new CommandDTD();
+                cmdAttribute(cmd,listaAttr);
                 
-                //Obtengo los tag forward
+                //Obtengo la lista de forwards
                 List<Element> listaForward = listaComandos.get(i).getChildren();
-
-                ForwardDTD frw = new ForwardDTD();
 
                 for(int q=0; q < listaForward.size(); q++){
 
+                    //Obtengo los atributos de forward
                     listaAttr = listaForward.get(q).getAttributes();
 
-                    for(int y=0; y < listaAttr.size(); y++){
+                    ForwardDTD frw = new ForwardDTD();
+                    frwAttribute(frw,listaAttr);
 
-                        if(listaAttr.get(y).getName().equals("path")){
-                            frw.setPath(listaAttr.get(y).getValue());
-                        }else if(listaAttr.get(y).getName().equals("name")){
-                            frw.setName(listaAttr.get(y).getValue());
-                        }
-
-                    }
-                    System.out.println(frw.getName() + "-" + frw.getPath());
+                    //Asigno el forward al comando correspondiente
+                    cmd.getListForward().add(frw);
                 }
+
+                this.commandMapping.getListCommand().add(cmd);
+
             }
 
         } catch (JDOMException ex) {
@@ -98,9 +97,7 @@ public class ParseXMLFile {
     }
 
 
-    private CommandDTD cmdAttribute (List<Attribute> listaAtributos){
-
-        CommandDTD cmd = new CommandDTD();
+    private void cmdAttribute (CommandDTD cmd, List<Attribute> listaAtributos){
 
         for(int j=0; j < listaAtributos.size();j++){
 
@@ -113,11 +110,22 @@ public class ParseXMLFile {
             }
 
         }
-        return cmd;
-
     }
 
 
+    private void frwAttribute (ForwardDTD frw,List<Attribute> listaAtributos){
+
+        for(int i=0; i < listaAtributos.size(); i++){
+
+            if(listaAtributos.get(i).getName().equals(this.ATT_PATH)){
+                frw.setPath(listaAtributos.get(i).getValue());
+            }else if(listaAtributos.get(i).getName().equals(this.ATT_NAME)){
+                frw.setName(listaAtributos.get(i).getValue());
+            }
+
+        }
+
+    }
 
 
 }
