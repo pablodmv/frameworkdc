@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import xmlParse.CommandDTD;
+import xmlParse.ParseXMLFile;
 
 
 /**
@@ -31,12 +33,18 @@ public class FrontController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            
+
+            //Obtenemos el comando de la URL
             String comando = obtenerComando(request.getRequestURL().toString());
-            /*/*TODO- Invocar al metodo createCommand del CommandFactory*/
+
+            //Buscamos el comando en el archivo mvc.xml, y obtenemos el CommandDTD
+            CommandDTD comDTD = sCommand(comando);
             
-
-
+            if(comDTD != null){
+                /*/*TODO- Invocar al metodo createCommand del CommandFactory*/
+                
+            }
+            
         } finally { 
             out.close();
         }
@@ -88,11 +96,26 @@ private String obtenerComando (String url){
     }
 
     String[] comando = comandoTemp.split("\\.");
-    //System.out.println("El comando es: " + comando[0]);
-
 
     return comando[0];
 }
+
+public CommandDTD sCommand (String command){
+
+        CommandDTD com = null;
+
+        ParseXMLFile pxml = new ParseXMLFile();
+        pxml.parsing("mvcTest.xml");
+
+        for(CommandDTD comAux : pxml.getCommandMapping().getListCommand()){
+
+            if(comAux.getPath().equals("/"+command)){
+                com = comAux;
+                return com;
+            }
+        }
+        return com;
+    }
 
 
 }
