@@ -5,7 +5,7 @@
 
 package xmlParse;
 
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -52,7 +52,7 @@ public class ParseXMLFile {
 
         try {
             doc = builder.build(new FileInputStream(java.lang.System.getProperty("user.dir")+"/test/jdomTest/"+xmlFile));
-
+            System.out.println(java.lang.System.getProperty("user.dir"));
             Element root = doc.getRootElement ();
             root.getName ();
             Element commMappingsXML = root.getChild(this.TAG_CMD_MAP);
