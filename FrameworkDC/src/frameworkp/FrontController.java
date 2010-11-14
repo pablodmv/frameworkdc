@@ -7,11 +7,17 @@ package frameworkp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import xmlParse.CommandDTD;
+import xmlParse.ForwardDTD;
 import xmlParse.ParseXMLFile;
 
 
@@ -20,7 +26,14 @@ import xmlParse.ParseXMLFile;
  * @author pablo
  */
 public class FrontController extends HttpServlet {
-   
+
+    private ServletContext sc;
+    private RequestDispatcher dispatcher;
+
+    @Override
+     public void init(ServletConfig config) throws ServletException{
+        sc = config.getServletContext();
+     }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -30,6 +43,7 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -41,8 +55,42 @@ public class FrontController extends HttpServlet {
             CommandDTD comDTD = sCommand(comando);
             
             if(comDTD != null){
-                /*/*TODO- Invocar al metodo createCommand del CommandFactory*/
+                try {
+
+                    if(comDTD.getForwardTo() != null){
+                        dispatcher = sc.getRequestDispatcher(comDTD.getForwardTo());
+                    }else{
+                        //Generamos la instacia concreta del comando, cuyo nombre se encuentra en
+                        //la variable comDTD en el atributo type de la clase CommandDTD
+                        Command currentCommand = CommandFactory.createCommand(comDTD.getType());
+
+                        String output = currentCommand.execute(request, response);
+
+                        //Busco en la lista de ForwardDTD el name que que coincida con la variable output
+                        //para luego obtener el path a realizar el forward correspondiente.
+                        boolean find = false;
+                        int cont = 0;
+                        while((cont < comDTD.getListForward().size()) && !find){
+
+                            if(comDTD.getListForward().get(cont).getName().equals(output)){
+                                ForwardDTD currentForward = comDTD.getListForward().get(cont);
+                                dispatcher = sc.getRequestDispatcher(currentForward.getPath());
+                                find = true;
+                            }
+
+                            cont +=1;
+                        }
+                    }
+                    
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
+                dispatcher.forward(request, response);
             }
             
         } finally { 
