@@ -66,7 +66,7 @@ public class FrontController extends HttpServlet {
 
                         String output = currentCommand.execute(request, response);
 
-                        //Busco en la lista de ForwardDTD el name que que coincida con la variable output
+                        //Busco en la lista de ForwardDTD el name que coincida con la variable output
                         //para luego obtener el path a realizar el forward correspondiente.
                         boolean find = false;
                         int cont = 0;
@@ -153,8 +153,11 @@ public CommandDTD sCommand (String command){
         CommandDTD com = null;
 
         ParseXMLFile pxml = new ParseXMLFile();
-        pxml.parsing("mvcTest.xml");
-
+        //pxml.parsing("mvcTest.xml");
+        //System.out.println("EL PATH: "+this.sc.getContextPath());
+        System.out.println("EL PATH: "+this.sc.getRealPath("/WEB-INF/mvc.xml"));
+        System.out.println("EL PATH dtd: "+this.sc.getRealPath("/WEB-INF/mvc.dtd"));
+        pxml.parsing(this.sc.getRealPath("/WEB-INF/mvc.xml"));
         for(CommandDTD comAux : pxml.getCommandMapping().getListCommand()){
 
             if(comAux.getPath().equals("/"+command)){

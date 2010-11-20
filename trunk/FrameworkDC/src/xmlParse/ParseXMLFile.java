@@ -8,6 +8,7 @@ package xmlParse;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,10 +50,10 @@ public class ParseXMLFile {
 
         SAXBuilder builder = new SAXBuilder (true);
         Document doc;
-
+        
         try {
-            doc = builder.build(new FileInputStream(java.lang.System.getProperty("user.dir")+"/test/jdomTest/"+xmlFile));
-            System.out.println(java.lang.System.getProperty("user.dir"));
+            //doc = builder.build(new FileInputStream(java.lang.System.getProperty("user.dir")+"/test/jdomTest/"+xmlFile));
+            doc = builder.build(new FileInputStream(xmlFile));
             Element root = doc.getRootElement ();
             root.getName ();
             Element commMappingsXML = root.getChild(this.TAG_CMD_MAP);
