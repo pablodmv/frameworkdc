@@ -153,11 +153,10 @@ public CommandDTD sCommand (String command){
         CommandDTD com = null;
 
         ParseXMLFile pxml = new ParseXMLFile();
-        //pxml.parsing("mvcTest.xml");
-        //System.out.println("EL PATH: "+this.sc.getContextPath());
-        System.out.println("EL PATH: "+this.sc.getRealPath("/WEB-INF/mvc.xml"));
-        System.out.println("EL PATH dtd: "+this.sc.getRealPath("/WEB-INF/mvc.dtd"));
-        pxml.parsing(this.sc.getRealPath("/WEB-INF/mvc.xml"));
+//        System.out.println("EL PATH: "+this.sc.getRealPath("/WEB-INF/mvc.xml"));
+//
+//        System.out.println("EL PATH dtd: "+this.sc.getRealPath("/WEB-INF/mvc.dtd"));
+        pxml.parsing(this.sc.getRealPath("/WEB-INF/mvc.xml"),"file:"+this.sc.getRealPath("/WEB-INF/mvc.dtd"));
         for(CommandDTD comAux : pxml.getCommandMapping().getListCommand()){
 
             if(comAux.getPath().equals("/"+command)){

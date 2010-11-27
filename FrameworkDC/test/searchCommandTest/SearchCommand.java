@@ -20,7 +20,7 @@ public class SearchCommand {
         CommandDTD com = null;
 
         ParseXMLFile pxml = new ParseXMLFile();
-        pxml.parsing("mvcTest.xml");
+        pxml.parsing("mvcTest.xml","mvc.dtd");
 
         for(CommandDTD comAux : pxml.getCommandMapping().getListCommand()){
 
