@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : 21/10/2010, 06:54:04 PM
-    Author     : pablo
+    Document   : Error
+    Created on : 27/11/2010, 09:04:10 PM
+    Author     : Gustavo Leites
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,12 +11,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Error</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-
-    <a href="Bienvenido.cmd" id="link1">Pagina de Bienvenida</a><br/>
-    <a href="Login.cmd" id="link1">Login</a>
+        <h1>Acceso Denegado</h1>
     </body>
 </html>
