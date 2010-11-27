@@ -17,6 +17,9 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -29,6 +32,7 @@ public class ParseXMLFile {
     private final String ATT_TYPE = "type";
     private final String ATT_NAME = "name";
     private final String TAG_CMD_MAP = "command-mappings";
+    private static String DTD_PATH = "";
 
     private CommandMappingDTD commandMapping = new CommandMappingDTD();
 
@@ -46,13 +50,18 @@ public class ParseXMLFile {
     }
 
 
-    public void parsing (String xmlFile){
+    public void parsing (String xmlFile, String dtdFile){
 
         SAXBuilder builder = new SAXBuilder (true);
         Document doc;
-        
+        DTD_PATH = dtdFile;
         try {
-            //doc = builder.build(new FileInputStream(java.lang.System.getProperty("user.dir")+"/test/jdomTest/"+xmlFile));
+            builder.setEntityResolver(new EntityResolver() {
+                @Override
+                public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
+                
+                    return new InputSource(DTD_PATH);
+            } });
             doc = builder.build(new FileInputStream(xmlFile));
             Element root = doc.getRootElement ();
             root.getName ();

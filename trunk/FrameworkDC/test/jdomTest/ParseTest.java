@@ -20,7 +20,7 @@ public class ParseTest {
         
         ParseXMLFile pxml = new ParseXMLFile();
 
-        pxml.parsing("mvcTest.xml");
+        pxml.parsing("mvcTest.xml","mvc.dtd");
         System.out.println(pxml.getCommandMapping().getListCommand().size());
     }
 
