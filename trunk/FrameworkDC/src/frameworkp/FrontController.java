@@ -144,7 +144,7 @@ private String obtenerComando (String url){
     }
 
     String[] comando = comandoTemp.split("\\.");
-
+//System.out.println("El comando es"+comando[0]);
     return comando[0];
 }
 
