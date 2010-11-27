@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE mvc-config SYSTEM "file:/C:/Users/Gustavo Leites/ORT/Semestre 6/Diseño de Componentes/Obligatorio/Libreta/dist/gfdeploy/Libreta/Libreta-war_war/WEB-INF/mvc.dtd">
+<!DOCTYPE mvc-config SYSTEM "mvc.dtd">
 <!--
     Document   : mvcTest.xml
     Created on : 23 de octubre de 2010, 04:47 PM
@@ -12,15 +12,11 @@
 <mvc-config>
     <command-mappings>
         <command path="/Bienvenido" forwardTo="/Bienvenido.jsp"/>
-        <command path="/Login" forwardTo="/paginas/Login.jsp"/>
+        <command path="/Login" forwardTo="/Login.jsp"/>
 
-        <command path="/LoginSubmit" type="app.LoginCommand">
-            <forward name="entrar" path="/paginas/Principal.jsp"/>
-            <forward name="error" path="/paginas/Login.jsp"/>
-        </command>
-
-        <command path="/Logout" type="app.LogoutCommand">
-            <forward name="ok" path="/paginas/Login.jsp"/>
+        <command path="/Check" type="concreteCommands.ComandoConcreto">
+            <forward name="Success" path="/Bienvenido.jsp"/>
+            <forward name="Fail" path="/Error.jsp"/>
         </command>
 
     </command-mappings>
