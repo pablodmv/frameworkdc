@@ -55,7 +55,8 @@ public class ComandoConcreto implements Command {
             this.pwd = request.getParameter("pwd");
             Context ctx = new InitialContext();
             LoginEjbLocal miEjb = (LoginEjbLocal) ctx.lookup("java:comp/env/LoginEjb");
-            
+
+            request.setAttribute("usuario", this.login);
             return miEjb.verificarUsuario(login, pwd);
             
         } catch (NamingException ex) {

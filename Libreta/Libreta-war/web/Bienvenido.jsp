@@ -14,6 +14,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Bienvenidos</h1>
+        <%if(request.getAttribute("usuario") != null){%>
+        <h1>Bienvenido Usuario <%=request.getAttribute("usuario")%></h1>
+        <%}else{%>
+        <h1> Bienvenido Usuario Invitado</h1>
+        <%}%>
     </body>
 </html>
