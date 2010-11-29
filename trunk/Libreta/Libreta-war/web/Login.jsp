@@ -18,7 +18,7 @@
 
         <form action="Check.cmd" method="get">
             <label for="usuario">Usuario:</label>
-            <input id="usuario" value="probando" name="usr"/><br/>
+            <input id="usuario" value="" name="usr"/><br/>
 
             <label for="pwd">Password:</label>
             <input id="pwd" type="password" value="" name="pwd"/><br/>

@@ -21,6 +21,6 @@
         <ejb-ref-name>LoginEjb</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <local>miPaquete.LoginEjbLocal</local>
-        <ejb-link>Libreta-ejb.jar#LoginEjb</ejb-link>
+        <ejb-link>LoginEjb</ejb-link>
     </ejb-local-ref>
 </web-app>
