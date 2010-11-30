@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 21/10/2010, 06:54:04 PM
+    Document   : Msj
+    Created on : 30/11/2010, 04:01:38 PM
     Author     : pablo
 --%>
 
@@ -15,9 +15,5 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-
-    <a href="Bienvenido.cmd" id="link1">Pagina de Bienvenida</a><br/>
-    <a href="Login.cmd" id="link1">Login</a>
-    <a href="addUser.cmd" id="link1">Agregar Usuario</a><br/>
     </body>
 </html>

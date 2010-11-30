@@ -5,6 +5,7 @@
 
 package concreteCommands;
 
+
 import frameworkp.Command;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -58,12 +59,26 @@ public class ComandoConcreto implements Command {
 
             request.setAttribute("usuario", this.login);
             return miEjb.verificarUsuario(login, pwd);
-            
+
         } catch (NamingException ex) {
             Logger.getLogger(ComandoConcreto.class.getName()).log(Level.SEVERE, "No se pudo encontrar el EJB", ex);
         }
 
         return "";
     }
+
+    private LoginEjbLocal lookupLoginEjbLocal() {
+        try {
+            Context c = new InitialContext();
+            return (LoginEjbLocal) c.lookup("java:comp/env/LoginEjb");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+
+
+
 
 }

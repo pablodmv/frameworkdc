@@ -5,9 +5,26 @@
         <servlet-class>frameworkp.FrontController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>setup</servlet-name>
+        <servlet-class>setup.Setup</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>addUser</servlet-name>
+        <servlet-class>concreteCommands.AddUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FrontController</servlet-name>
         <url-pattern>*.cmd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>setup</servlet-name>
+        <url-pattern>/setup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addUser</servlet-name>
+        <url-pattern>/addUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -22,5 +39,11 @@
         <ejb-ref-type>Session</ejb-ref-type>
         <local>miPaquete.LoginEjbLocal</local>
         <ejb-link>LoginEjb</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ABMUsuario</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>ejb.ABMUsuarioLocal</local>
+        <ejb-link>ABMUsuario</ejb-link>
     </ejb-local-ref>
 </web-app>

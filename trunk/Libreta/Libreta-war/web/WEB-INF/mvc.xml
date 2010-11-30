@@ -13,9 +13,15 @@
     <command-mappings>
         <command path="/Bienvenido" forwardTo="/Bienvenido.jsp"/>
         <command path="/Login" forwardTo="/Login.jsp"/>
+        <command path="/addUser" forwardTo="/altaUsuario.jsp"/>
 
         <command path="/Check" type="concreteCommands.ComandoConcreto">
             <forward name="Success" path="/Bienvenido.jsp"/>
+            <forward name="Fail" path="/Error.jsp"/>
+        </command>
+
+        <command path="/AddUser" type="concreteCommands.addUser">
+            <forward name="Success" path="/Msj.jsp"/>
             <forward name="Fail" path="/Error.jsp"/>
         </command>
 
