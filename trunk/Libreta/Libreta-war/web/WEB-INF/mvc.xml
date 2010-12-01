@@ -14,6 +14,7 @@
         <command path="/Bienvenido" forwardTo="/Bienvenido.jsp"/>
         <command path="/Login" forwardTo="/Login.jsp"/>
         <command path="/addUser" forwardTo="/altaUsuario.jsp"/>
+        <command path="/editUser" forwardTo="/EditarUsuario.jsp"/>
 
         <command path="/Check" type="concreteCommands.ComandoConcreto">
             <forward name="Success" path="/Bienvenido.jsp"/>
