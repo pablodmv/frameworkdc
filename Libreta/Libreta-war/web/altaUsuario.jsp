@@ -17,11 +17,26 @@
         <h1>Agregar usuario</h1>
 
          <form action="AddUser.cmd" method="get">
-            <label for="usuario">Nombre:</label>
+            <label for="nombre">Nombre:</label>
             <input id="nombre" value="" name="nombre"/><br/>
 
-            <label for="pwd">Apellido:</label>
+            <label for="apellido">Apellido:</label>
             <input id="apellido"  value="" name="apellido"/><br/>
+
+            <label for="usuario">Usuario:</label>
+            <input id="usuario"  value="" name="usuario"/><br/>
+
+            <label for="pwd">Password:</label>
+            <input id="pwd"  value="" name="pwd"/><br/>
+
+            <label for="fNac">Fecha Nacimiento:</label>
+            <input id="fNac"  value="" name="fNac"/><br/>
+
+            <label for="cbxRoles">Rol:</label>
+            <select id="cbxRoles" name="rol">
+                <option>Administrador</option>
+                <option>Usuario</option>
+            </select>
 
             <button type="submit">Aceptar</button>
         </form>

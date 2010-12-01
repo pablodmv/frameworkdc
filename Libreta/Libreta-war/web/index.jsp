@@ -17,7 +17,8 @@
         <h1>Hello World!</h1>
 
     <a href="Bienvenido.cmd" id="link1">Pagina de Bienvenida</a><br/>
-    <a href="Login.cmd" id="link1">Login</a>
-    <a href="addUser.cmd" id="link1">Agregar Usuario</a><br/>
+    <a href="Login.cmd" id="link2">Login</a><br/>
+    <a href="addUser.cmd" id="link3">Agregar Usuario</a><br/>
+    <a href="editUser.cmd" id="link4">Modificar Usuario</a>
     </body>
 </html>
