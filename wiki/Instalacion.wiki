@@ -1,0 +1,40 @@
+########################################################
+###                                                  ###
+###          LIBRETA CONTACTOS - REQUISITOS          ###
+###               Diseño de Componentes              ###
+###           U N I V E R S I D A D  O R T           ###
+###                                                  ###
+###                 Leites - Martinez                ###
+########################################################
+
+
+Requisitos para instalar el proyecto Libreta
+
+1) Crear base de datos
+
+Usando Netbeans 6.8 o superior, crear una base de datos JavaDB
+con la siguiente especificación:
+
+                Nombre: libretaDB
+                Usuario: admin
+                password: admin
+
+2) Crear Dominio de seguridad
+
+Abrir la Consola de Administracion de Glassfish desde Netbeans
+o a traves de http://localhost:4848/login.jsf e ingresar un nuevo
+Dominio de seguridad con los siguientes datos:
+
+	Nombre del dominio de seguridad: libreta
+        Nombre de clase: com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm
+	Contexto JAAS: jdbcRealm
+	Nombre JNDI: jdbc/libretaDB
+	Tabla de usuario: CREDENCIALES
+	Colummna de nombre de usuario: LOGIN
+	Columna de contraseña: PASSWORD
+	Tabla de grupo: CREDENCIALES
+	Columna de nombre de grupo: ROL
+	Algoritmo Digest: none
+
+3) Hacer el Deploy de la aplicación y probarla ingresando a
+http://localhost:8080/Libreta-war/index.jsp
