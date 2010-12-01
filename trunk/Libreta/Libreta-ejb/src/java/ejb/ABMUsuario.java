@@ -9,6 +9,9 @@ import entities.Usuario;
 import entities.Credenciales;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -16,6 +19,12 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class ABMUsuario implements ABMUsuarioLocal {
+
+
+     @PersistenceContext()
+    private EntityManager em;
+
+
 
     public String alta(String login, String password, String nombre, String apellido) {
         Usuario user= new Usuario();
@@ -25,7 +34,12 @@ public class ABMUsuario implements ABMUsuarioLocal {
         user.setNombre(nombre);
         user.setApellido(apellido);
         user.setCredencial(cred);
-        return "Success";
+        try {
+             em.persist(user);
+             return "Success";
+        } catch (Exception e) {
+            return e.toString();
+        }
 
     }
 
