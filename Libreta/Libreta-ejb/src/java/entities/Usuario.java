@@ -11,11 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import java.util.Date;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import java.util.List;
+import javax.persistence.CascadeType;
 
 /**
  *
@@ -38,11 +40,11 @@ public class Usuario implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNacimiento;
 
-    @Column
-    @OneToOne
+    @JoinColumn
+    @OneToOne(mappedBy="user", cascade=CascadeType.PERSIST)
     private Credenciales credencial;
 
-    @Column
+    @JoinColumn
     @OneToMany
     private List<Contacto> contactos;
 
