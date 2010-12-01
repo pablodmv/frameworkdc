@@ -7,6 +7,7 @@ package ejb;
 
 import entities.Usuario;
 import entities.Credenciales;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,13 +27,15 @@ public class ABMUsuario implements ABMUsuarioLocal {
 
 
 
-    public String alta(String login, String password, String nombre, String apellido) {
+    public String alta(String login, String password, String nombre, String apellido, Date fNacimiento, String rol) {
         Usuario user= new Usuario();
         Credenciales cred = new Credenciales();
         cred.setLogin(login);
         cred.setPassword(password);
+        cred.setRol(rol);
         user.setNombre(nombre);
         user.setApellido(apellido);
+        user.setFechaNacimiento(fNacimiento);
         user.setCredencial(cred);
         try {
              em.persist(user);

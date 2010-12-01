@@ -7,6 +7,7 @@ package ejb;
 
 import javax.ejb.Local;
 import entities.Usuario;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,9 +17,9 @@ import java.util.List;
 @Local
 public interface ABMUsuarioLocal {
     
-    Usuario obtener(String login);
-    String alta(String login, String password, String nombre, String apellido);
-    Usuario modificar(Usuario u);
-    void eliminar(Usuario u);
-    List<Usuario> consultar(String apellido);
+    public Usuario obtener(String login);
+    public String alta(String login, String password, String nombre, String apellido, Date fNacimiento, String rol);
+    public Usuario modificar(Usuario u);
+    public void eliminar(Usuario u);
+    public List<Usuario> consultar(String apellido);
 }
