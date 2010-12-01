@@ -10,6 +10,6 @@
         <property name="URL" value="jdbc:derby://localhost:1527/libretaBD"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="jdbc/libretaDB" object-type="user" pool-name="derby_net_libretaBD_administradorPool"/>
+    <!--<jdbc-resource enabled="true" jndi-name="jdbc/libretaDB" object-type="user" pool-name="derby_net_libretaBD_administradorPool"/>-->
     <jdbc-resource enabled="true" jndi-name="jdbc/libretaBD" object-type="user" pool-name="derby_net_libretaBD_administradorPool"/>
 </resources>
