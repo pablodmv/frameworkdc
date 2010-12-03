@@ -28,8 +28,8 @@ import javax.naming.InitialContext;
 public class addUser implements Command {
    
 
-    private String Nombre;
-    private String Apellido;
+    private String nombre;
+    private String apellido;
     private String login;
     private String pwd;
     private Date fNac;
@@ -39,19 +39,19 @@ public class addUser implements Command {
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
 
     public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
+        this.apellido = Apellido;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Date getfNac() {
@@ -89,31 +89,43 @@ public class addUser implements Command {
   @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+      String outcome = "Fail";
       try {
-            this.Nombre = request.getParameter("nombre");
-            this.Apellido = request.getParameter("apellido");
+            this.nombre = request.getParameter("nombre");
+            this.apellido = request.getParameter("apellido");
             this.login = request.getParameter("usuario");
             this.pwd = request.getParameter("pwd");
 
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
-            this.fNac = df.parse(request.getParameter("fNac"));
-            this.rol = request.getParameter("rol");
-            Context ctx = new InitialContext();
-            ABMUsuarioLocal ejbUsuario = (ABMUsuarioLocal) ctx.lookup("java:comp/env/ABMUsuario");
-            //request.setAttribute("usuario", this.login);
+            if(!request.getParameter("fNac").equals("") && !this.nombre.equals("") && !this.apellido.equals("") && !this.login.equals("") && !this.pwd.equals("")){
+                
+                this.fNac = df.parse(request.getParameter("fNac"));
+                this.rol = request.getParameter("rol");
+                Context ctx = new InitialContext();
+                ABMUsuarioLocal ejbUsuario = (ABMUsuarioLocal) ctx.lookup("java:comp/env/ABMUsuario");
+
+
+                outcome = ejbUsuario.alta(this.login,this.pwd,this.nombre,this.apellido,this.fNac,this.rol);
+
+                if(outcome.equals("Success")){
+                    request.setAttribute("mensaje", "Usuario Guardado con Exito!");
+                }else{
+                    request.setAttribute("mensaje", "El Usuario no se pudo ingresar.");
+                }
+            }else{
+                request.setAttribute("mensaje", "Faltan ingresar datos requeridos");
+            }
             
-            return ejbUsuario.alta(this.login,this.pwd,this.Nombre,this.Apellido,this.fNac,this.rol);
-
-
+            return outcome;
+        
         } catch (ParseException ex) {
             Logger.getLogger(addUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(ComandoConcreto.class.getName()).log(Level.SEVERE, "No se pudo encontrar el EJB", ex);
         }
 
-        return "";
-
+      return "";
     }
 
 

@@ -15,6 +15,7 @@
         <command path="/Login" forwardTo="/Login.jsp"/>
         <command path="/addUser" forwardTo="/altaUsuario.jsp"/>
         <command path="/editUser" forwardTo="/EditarUsuario.jsp"/>
+        <command path="/deleteUser" forwardTo="/EliminarUsuario.jsp"/>
 
         <command path="/Check" type="concreteCommands.ComandoConcreto">
             <forward name="Success" path="/Bienvenido.jsp"/>
@@ -22,8 +23,8 @@
         </command>
 
         <command path="/AddUser" type="concreteCommands.addUser">
-            <forward name="Success" path="/Msj.jsp"/>
-            <forward name="Fail" path="/Error.jsp"/>
+            <forward name="Success" path="/altaUsuario.jsp"/>
+            <forward name="Fail" path="/altaUsuario.jsp"/>
         </command>
 
     </command-mappings>
