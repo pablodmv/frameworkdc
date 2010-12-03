@@ -17,7 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.CascadeType;
+import javax.persistence.JoinTable;
 
 /**
  *
@@ -40,13 +42,22 @@ public class Usuario implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNacimiento;
 
-    @JoinColumn
-    @OneToOne(mappedBy="user", cascade=CascadeType.PERSIST)
+    //@JoinColumn(name="idCredencial")
+    
+//    @OneToOne(cascade=CascadeType.PERSIST)
+//    @JoinColumn(name="idCredencial")
+    @OneToOne(cascade=CascadeType.ALL)
     private Credenciales credencial;
 
-    @JoinColumn
-    @OneToMany
-    private List<Contacto> contactos;
+//    @JoinColumn
+//    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="USERCONTACT")
+   private List<Contacto> contactos;
+
+    public Usuario() {
+        this.contactos=new ArrayList<Contacto>();
+    }
 
 
 
@@ -88,8 +99,8 @@ public class Usuario implements Serializable {
         return contactos;
     }
 
-    public void setContactos(List<Contacto> contactos) {
-        this.contactos = contactos;
+    public void setContactos(Contacto contact) {
+        this.contactos.add(contact);
     }
 
     public Long getId() {

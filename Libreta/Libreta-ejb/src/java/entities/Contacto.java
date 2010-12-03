@@ -6,10 +6,16 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,6 +27,47 @@ public class Contacto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length=80, nullable=false)
+    private String nombre;
+    @Column(length=80, nullable=false)
+    private String apellido;
+    @Column
+    private String telefono;
+
+    @Column
+    private String movil;
+
+    @Column
+    private String email;
+
+   @OneToMany(cascade=CascadeType.ALL)
+   @JoinTable(name="ADRESSCONTACT")
+    private List<Direccion> direccion;
+
+    public Contacto() {
+        direccion= new ArrayList<Direccion>();
+    }
+
+
+    
+    public List<Direccion> getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion.add(direccion);
+    }
+
+    
+
+
+
+
+
+
+
+
+
 
     public Long getId() {
         return id;
@@ -29,6 +76,52 @@ public class Contacto implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMovil() {
+        return movil;
+    }
+
+    public void setMovil(String movil) {
+        this.movil = movil;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    
+
+
+
+
 
     @Override
     public int hashCode() {
