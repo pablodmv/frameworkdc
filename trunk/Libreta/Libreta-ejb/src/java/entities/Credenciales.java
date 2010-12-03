@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 
 /**
  *
@@ -24,24 +25,24 @@ public class Credenciales implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(length=120, nullable=false)
     private String Login;
-    @Column
+    @Column(length=120, nullable=false)
     private String Password;
 
     @Column
     private String rol;
 
-    @OneToOne
-    private Usuario user;
-
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
+//    @OneToOne
+//    private Usuario user;
+//
+//    public Usuario getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(Usuario user) {
+//        this.user = user;
+//    }
 
     public String getLogin() {
         return Login;

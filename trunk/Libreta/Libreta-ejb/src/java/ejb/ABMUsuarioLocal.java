@@ -17,9 +17,10 @@ import java.util.List;
 @Local
 public interface ABMUsuarioLocal {
     
-    public Usuario obtener(String login);
+    public Usuario obtener(Long id);
     public String alta(String login, String password, String nombre, String apellido, Date fNacimiento, String rol);
     public Usuario modificar(Usuario u);
-    public void eliminar(Usuario u);
-    public List<Usuario> consultar(String apellido);
+    public void eliminar(Long id);
+    public List<Usuario> consultar(String nombre, String apellido);
+    public List<Usuario> traerTodos();
 }
