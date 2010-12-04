@@ -16,42 +16,59 @@
     <body>
         <h1>Eliminar Usuario</h1>
 
-        <form id="buscarForm" action="" method="get">
+        <form id="buscarForm" action="SearchUser.cmd" method="get">
             <table>
                 <tr>
-                    <td><label for="idUsuarios">Cod.Usuarios:</label></td>
-                    <td><input id="idUsuarios" value="" name="idUsuarios"/></td>
+                    <td><input id="action" type="hidden" value="delete" name="action"/></td>
+                    <td><label for="idUsuarios">Cod.Usuario:</label></td>
+                    <td><input id="idUsuarios" value="" name="idUsuario"/></td>
                     <td><button type="submit">Buscar</button></td>
                 </tr>
             </table>
         </form>
         <br/>
-        <form id="editForm" action="" method="get">
+        <form id="editForm" action="DeleteUser.cmd" method="get">
             <table>
                 <tr>
+                    <td><input id="selectId" type="hidden" value="<%=request.getAttribute("selectId")%>" name="selectId"/></td>
+                </tr>
+                <tr>
                      <td><label for="nombre">Nombre:</label></td>
-                     <td><input id="nombre" disabled="true" value="" name="nombre"/></td>
+                     <td>
+                        <% if(request.getAttribute("nombre") != null){%>
+                         <input id="nombre" disabled="true" value="<%=request.getAttribute("nombre")%>" name="nombre"/>
+                         <%}else{%>
+                         <input id="nombre" disabled="true" value="" name="nombre"/>
+                         <%}%>
+                     </td>
                  </tr>
                  <tr>
                      <td><label for="apellido">Apellido:</label></td>
-                     <td><input id="apellido" disabled="true" value="" name="apellido"/></td>
+                     <td>
+                         <% if(request.getAttribute("apellido") != null){%>
+                         <input id="apellido" disabled="true" value="<%=request.getAttribute("apellido")%>" name="apellido"/>
+                         <%}else{%>
+                         <input id="apellido" disabled="true" value="" name="apellido"/>
+                         <%}%>
+                     </td>
                  </tr>
                  <tr>
                      <td><label for="usuario">Usuario:</label></td>
-                     <td><input id="usuario" disabled="true"  value="" name="usuario"/></td>
+                     <td>
+                         <% if(request.getAttribute("usuario") != null){%>
+                         <input id="usuario" disabled="true"  value="<%=request.getAttribute("usuario")%>" name="usuario"/>
+                         <%}else{%>
+                         <input id="usuario" disabled="true"  value="" name="usuario"/>
+                         <%}%>
+                     </td>
                  </tr>
                  <tr>
-                     <td><label for="pwd">Password:</label></td>
-                     <td><input type="password" disabled="true" id="pwd"  value="" name="pwd"/></td>
-                 </tr>
-                 <tr>
-                     <td><label for="fNac">Fecha Nacimiento:</label></td>
-                     <td><input id="fNac" disabled="true" value="" name="fNac"/></td>
-                 </tr>
-                 <tr>
-                    <td><button type="submit">Editar</button></td>
+                    <td><button type="submit">Eliminar</button></td>
                 </tr>
             </table>
+            <%if(request.getAttribute("mensaje") != null){%>
+            <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
+            <%}%>
         </form>
     </body>
 </html>
