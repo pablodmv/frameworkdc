@@ -46,4 +46,5 @@
         <local>ejb.ABMUsuarioLocal</local>
         <ejb-link>ABMUsuario</ejb-link>
     </ejb-local-ref>
+    
 </web-app>

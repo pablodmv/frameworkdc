@@ -14,12 +14,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Index Provisorio</h1>
+        <h1>Menu Provisorio</h1>
 
     <a href="Bienvenido.cmd" id="link1">Pagina de Bienvenida</a><br/>
     <a href="Login.cmd" id="link2">Login</a><br/>
     <a href="addUser.cmd" id="link3">Agregar Usuario</a><br/>
     <a href="editUser.cmd" id="link4">Modificar Usuario</a><br/>
-    <a href="deleteUser.cmd" id="link5">Eliminar Usuario</a>
+    <a href="deleteUser.cmd" id="link5">Eliminar Usuario</a><br/>
+    <a href="queryUser.cmd" id="link5">Consultar Usuario</a>
     </body>
 </html>
