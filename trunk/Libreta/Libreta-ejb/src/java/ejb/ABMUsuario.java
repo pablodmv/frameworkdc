@@ -30,7 +30,9 @@ public class ABMUsuario implements ABMUsuarioLocal {
 
 
 
+    @Override
     public String alta(String login, String password, String nombre, String apellido, Date fNacimiento, String rol) {
+
         Usuario user= new Usuario();
         Credenciales cred = new Credenciales();
         cred.setLogin(login);
@@ -40,37 +42,6 @@ public class ABMUsuario implements ABMUsuarioLocal {
         user.setApellido(apellido);
         user.setFechaNacimiento(fNacimiento);
         user.setCredencial(cred);
-
-        //TODO:Prueba de guardar contacto ##### Borrar
-        //TODO: Gustavo, esto hay que borrarlo junto con los import de contacto y direccion
-
-        String cNombre="Pablo";
-        String cApellido="Martinez";
-        String cTelefono="098124806";
-        String cMovil="09999999";
-        String cEmail="pablodmv@gmail.com";
-        Contacto contact=new Contacto();
-        Direccion dir = new Direccion();
-        dir.setCalle("Cuareim");
-        dir.setNumero("2556");
-        dir.setTipoDir(TipoDireccion.CASA);
-        contact.setNombre(cNombre);
-        contact.setApellido(cApellido);
-        contact.setTelefono(cTelefono);
-        contact.setMovil(cMovil);
-        contact.setEmail(cEmail);
-        contact.setDireccion(dir);
-        user.setContactos(contact);
-        List<Usuario> pepe = this.consultar("a", "a");
-
-        if (!pepe.isEmpty() ) {
-        Usuario prueba= this.obtener(pepe.get(0).getId());
-        }
-        
-
-
-        //Fin prueba guardar contacto ### Borrar
-
 
         try {
             //em.persist(cred);
@@ -83,11 +54,13 @@ public class ABMUsuario implements ABMUsuarioLocal {
     }
 
 
+    @Override
     public void eliminar(Long idUsuario) {
         Usuario user= this.obtener(idUsuario);
         em.remove(user);
     }
 
+    @Override
     public Usuario modificar(Usuario u) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -96,6 +69,7 @@ public class ABMUsuario implements ABMUsuarioLocal {
 //        throw new UnsupportedOperationException("Not supported yet.");
 //    }
 
+    @Override
     public Usuario obtener(Long id) {
 
         try {
@@ -109,6 +83,7 @@ public class ABMUsuario implements ABMUsuarioLocal {
 
     }
 
+    @Override
     public List<Usuario> consultar(String nombre, String apellido) {
         String jpl = "SELECT u FROM Usuario u WHERE u.nombre LIKE :nom AND u.apellido LIKE :ape";
         Query q = em.createQuery(jpl);
@@ -117,6 +92,7 @@ public class ABMUsuario implements ABMUsuarioLocal {
         return (List<Usuario>)q.getResultList();
     }
 
+    @Override
     public List<Usuario> traerTodos() {
          String jpl = "SELECT u FROM Usuario u";
         Query q = em.createQuery(jpl);

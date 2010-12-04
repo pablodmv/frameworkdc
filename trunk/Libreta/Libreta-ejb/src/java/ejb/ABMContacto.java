@@ -28,6 +28,7 @@ public class ABMContacto implements ABMContactoLocal {
 
   
 
+    @Override
     public String alta(String nombre, String apellido, String telefono, String movil, String email,Usuario user) {
          Contacto contact= new Contacto();
         contact.setNombre(nombre);
@@ -46,6 +47,7 @@ public class ABMContacto implements ABMContactoLocal {
 
     }
 
+    @Override
     public Contacto modificar(Contacto c) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -56,19 +58,14 @@ public class ABMContacto implements ABMContactoLocal {
 
  
     
+    @Override
    public void eliminar(Long idContacto) {
         Contacto contact= this.obtener(idContacto);
         em.remove(contact);
     }
 
-    public Usuario modificar(Usuario u) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
-//    public Usuario obtener(String login) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-
+    @Override
     public Contacto obtener(Long id) {
 
         try {
@@ -82,6 +79,7 @@ public class ABMContacto implements ABMContactoLocal {
 
     }
 
+    @Override
     public List<Contacto> consultar(String nombre, String apellido) {
         String jpl = "SELECT c FROM Contacto c WHERE c.nombre LIKE :nom AND c.apellido LIKE :ape";
         Query q = em.createQuery(jpl);
@@ -90,6 +88,7 @@ public class ABMContacto implements ABMContactoLocal {
         return (List<Contacto>)q.getResultList();
     }
 
+    @Override
     public List<Contacto> traerTodos() {
          String jpl = "SELECT c FROM Usuario c";
         Query q = em.createQuery(jpl);
