@@ -53,45 +53,9 @@ public class FrontController extends HttpServlet {
 
             //Buscamos el comando en el archivo mvc.xml, y obtenemos el CommandDTD
             CommandDTD comDTD = sCommand(comando);
-            
-            if(comDTD != null){
-                try {
+            this.dispatcher = navigator(comDTD,request,response);
 
-                    if(comDTD.getForwardTo() != null){
-                        dispatcher = sc.getRequestDispatcher(comDTD.getForwardTo());
-                    }else{
-                        //Generamos la instacia concreta del comando, cuyo nombre se encuentra en
-                        //la variable comDTD en el atributo type de la clase CommandDTD
-                        Command currentCommand = CommandFactory.createCommand(comDTD.getType());
-
-                        String output = currentCommand.execute(request, response);
-
-                        //Busco en la lista de ForwardDTD el name que coincida con la variable output
-                        //para luego obtener el path a realizar el forward correspondiente.
-                        boolean find = false;
-                        int cont = 0;
-                        while((cont < comDTD.getListForward().size()) && !find){
-
-                            if(comDTD.getListForward().get(cont).getName().equals(output)){
-                                ForwardDTD currentForward = comDTD.getListForward().get(cont);
-                                dispatcher = sc.getRequestDispatcher(currentForward.getPath());
-                                find = true;
-                            }
-
-                            cont +=1;
-                        }
-                    }
-                    
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                dispatcher.forward(request, response);
-            }
+            this.dispatcher.forward(request, response);
             
         } finally { 
             out.close();
@@ -134,6 +98,7 @@ public class FrontController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+// Obtiene el comando de una url
 private String obtenerComando (String url){
 
     String[] urlParsed = url.split("/");
@@ -148,7 +113,8 @@ private String obtenerComando (String url){
     return comando[0];
 }
 
-public CommandDTD sCommand (String command){
+//Busca el comando en el xml parseado.
+private CommandDTD sCommand (String command){
 
         CommandDTD com = null;
 
@@ -167,5 +133,67 @@ public CommandDTD sCommand (String command){
         return com;
     }
 
+//Verifica si el parametro text es un comando o un pagina jsp
+private Boolean isPage(String text){
+    
+    return text.endsWith(".jsp");
+    
+}
+
+//Es el encargado de determinar la navegacion de las paginas.
+private RequestDispatcher navigator(CommandDTD comDTD, HttpServletRequest request, HttpServletResponse response){
+
+    //System.out.println("Metodo navigator");
+    RequestDispatcher reqDis = null;
+    if(comDTD != null){
+            
+                try {
+                    if (comDTD.getForwardTo() != null) {
+                        if (isPage(comDTD.getForwardTo())) {
+                            //System.out.println("Es pagina");
+                            return sc.getRequestDispatcher(comDTD.getForwardTo());
+                        } else {
+                            //System.out.println("No es pagina");
+                            return navigator(sCommand(comDTD.getForwardTo()),request, response);
+                        }
+                    } else {
+                        //Generamos la instacia concreta del comando, cuyo nombre se encuentra en
+                        //la variable comDTD en el atributo type de la clase CommandDTD
+                        Command currentCommand = CommandFactory.createCommand(comDTD.getType());
+                        String output = currentCommand.execute(request, response);
+                        //Busco en la lista de ForwardDTD el name que coincida con la variable output
+                        //para luego obtener el path a realizar el forward correspondiente.
+                        boolean find = false;
+                        int cont = 0;
+                        ForwardDTD currentForward = null;
+                        while ((cont < comDTD.getListForward().size()) && !find) {
+                            if (comDTD.getListForward().get(cont).getName().equals(output)) {
+                                currentForward = comDTD.getListForward().get(cont);
+                                find = true;
+                            }
+                            cont += 1;
+                        }
+                        if (find) {
+                            if (isPage(currentForward.getPath())) {
+                                return sc.getRequestDispatcher(currentForward.getPath());
+                            } else {
+                                return navigator(sCommand(currentForward.getPath()), request, response);
+                            }
+                        }
+                    }
+                } catch (ServletException ex) {
+                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        return reqDis;
+    }
 
 }
