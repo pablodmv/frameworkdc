@@ -58,16 +58,9 @@ public class Contacto implements Serializable {
         this.direccion.add(direccion);
     }
 
-    
-
-
-
-
-
-
-
-
-
+    public void setListDir(List<Direccion> listDir){
+        this.direccion = listDir;
+    }
 
     public Long getId() {
         return id;
@@ -116,11 +109,6 @@ public class Contacto implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    
-
-
-
 
 
     @Override

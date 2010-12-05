@@ -34,6 +34,12 @@ public class Direccion implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoDireccion tipoDir;
 
+
+    public Direccion(){
+        
+    }
+
+
     public TipoDireccion getTipoDir() {
         return tipoDir;
     }
@@ -57,17 +63,6 @@ public class Direccion implements Serializable {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public Long getId() {
         return id;
