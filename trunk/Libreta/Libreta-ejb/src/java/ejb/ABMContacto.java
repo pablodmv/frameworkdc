@@ -6,6 +6,7 @@
 package ejb;
 
 import entities.Contacto;
+import entities.Direccion;
 import entities.Usuario;
 
 import java.util.List;
@@ -29,13 +30,14 @@ public class ABMContacto implements ABMContactoLocal {
   
 
     @Override
-    public String alta(String nombre, String apellido, String telefono, String movil, String email,Usuario user) {
-         Contacto contact= new Contacto();
+    public String alta(String nombre, String apellido, String telefono, String movil, String email,List<Direccion>listaDir,Usuario user) {
+        Contacto contact= new Contacto();
         contact.setNombre(nombre);
         contact.setApellido(apellido);
         contact.setTelefono(telefono);
         contact.setMovil(movil);
         contact.setEmail(email);
+        contact.setListDir(listaDir);
         user.setContactos(contact);
         try {
             em.persist(contact);
