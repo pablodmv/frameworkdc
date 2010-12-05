@@ -21,6 +21,8 @@
     <a href="addUser.cmd" id="link3">Agregar Usuario</a><br/>
     <a href="editUser.cmd" id="link4">Modificar Usuario</a><br/>
     <a href="deleteUser.cmd" id="link5">Eliminar Usuario</a><br/>
-    <a href="queryUser.cmd" id="link5">Consultar Usuario</a>
+    <a href="queryUser.cmd" id="link6">Consultar Usuario</a><br/><br/>
+    <a href="addContact.cmd" id="link7">Agregar Contacto</a>
+
     </body>
 </html>

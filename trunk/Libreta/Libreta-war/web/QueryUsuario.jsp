@@ -4,8 +4,9 @@
     Author     : Gustavo Leites
 --%>
 
+<%@page import="entities.Usuario"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,13 +14,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+        <script src="js/checkBoxes.js" type="text/javascript"></script>
         <title>Administracion - Consultar Usuarios</title>
     </head>
     <body>
         <h1>Consulta Usuarios</h1>
 
-        <form action="" name="formulario" method="get">
+        <form action="QueryUser.cmd" name="formulario" method="get">
 
             <table>
                 <tr>
@@ -28,9 +29,13 @@
                     <td><input id="nombre" type="text" disabled name="nombre" /></td>
                 </tr>
                 <tr>
-                    <td><input id="apelldoOp" type="checkbox" name="apelldoOp" onclick="document.formulario.apellido.disabled=!document.formulario.apellido.disabled"/></td>
+                    <td><input id="apellidoOp" type="checkbox" name="apellidoOp" onclick="document.formulario.apellido.disabled=!document.formulario.apellido.disabled"/></td>
                     <td><label for="apellido">Apellido:</label></td>
                     <td><input id="apellido" type="text" disabled name="apellido" /></td>
+                </tr>
+                <tr>
+                    <td><input id="getAll" type="checkbox" name="getAll" onclick="setCheckBox()"/></td>
+                    <td><label>Obtener Todos:</label>  </td>
                 </tr>
                 <tr>
                     <td><button type="submit">Buscar</button></td>
@@ -38,15 +43,37 @@
             </table>
             <br/>
             <br/>
-            <table>
-                <c:forEach var="person" items="">
-                  <tr>
-                      <td>${person.name}</td>
-                      <td>${person.age}</td>
-                      <td>${person.height}</td>
-                  </tr>
-                </c:forEach>
+            <table border="1" width="400px" >
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha.Nac</th>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                </tr>
+                <%
+                if(request.getAttribute("listaUsuarios") != null){
+                List<Usuario> listaUsuarios = (List<Usuario>)request.getAttribute("listaUsuarios");
+                if(listaUsuarios.size() > 0){
+                    for(Usuario usr : listaUsuarios){
+                %>
+                <tr>
+                    <td><%=usr.getId() %></td>
+                    <td><%=usr.getNombre() %></td>
+                    <td><%=usr.getApellido() %></td>
+                    <td><%=usr.getFechaNacimiento() %></td>
+                    <td><%=usr.getCredencial().getLogin() %></td>
+                    <td><%=usr.getCredencial().getRol() %></td>
+                </tr>
+                <%}%>
+                <%}%>
+                <%}%>
+
             </table>
+            <%if(request.getAttribute("mensaje") != null){%>
+            <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
+            <%}%>
         </form>
     </body>
 </html>

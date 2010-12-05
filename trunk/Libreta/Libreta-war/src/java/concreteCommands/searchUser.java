@@ -82,7 +82,7 @@ public class searchUser implements Command {
                 Usuario usr = ejbUsuario.obtener(this.id);
                 
                 if(usr != null){
-                System.out.println("Exite usuario");
+                
                     //El usuario fue obtenido con exito
                     request.setAttribute("nombre", usr.getNombre());
                     request.setAttribute("apellido", usr.getApellido());
