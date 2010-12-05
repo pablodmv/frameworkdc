@@ -18,6 +18,8 @@
         <command path="/deleteUser" forwardTo="/EliminarUsuario.jsp"/>
         <command path="/queryUser" forwardTo="/QueryUsuario.jsp"/>
 
+        <command path="/addContact" forwardTo="/AltaContacto.jsp"/>
+
         <command path="/Check" type="concreteCommands.ComandoConcreto">
             <forward name="Success" path="/Bienvenido.jsp"/>
             <forward name="Fail" path="/Error.jsp"/>
@@ -39,6 +41,17 @@
             <forward name="Success" path="/EliminarUsuario.jsp"/>
             <forward name="Fail" path="/EliminarUsuario.jsp"/>
         </command>
+
+        <command path="/QueryUser" type="concreteCommands.QueryUser">
+            <forward name="Success" path="/QueryUsuario.jsp"/>
+            <forward name="Fail" path="/QueryUsuario.jsp"/>
+        </command>
+
+        <command path="/AddContact" type="concreteCommands.AddContact">
+            <forward name="Success" path="/AltaContacto.jsp"/>
+            <forward name="Fail" path="/AltaContacto.jsp"/>
+        </command>
+
 
     </command-mappings>
 </mvc-config>
