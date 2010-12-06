@@ -22,7 +22,10 @@
     <a href="editUser.cmd" id="link4">Modificar Usuario</a><br/>
     <a href="deleteUser.cmd" id="link5">Eliminar Usuario</a><br/>
     <a href="queryUser.cmd" id="link6">Consultar Usuario</a><br/><br/>
-    <a href="addContact.cmd" id="link7">Agregar Contacto</a>
+    <a href="addContact.cmd" id="link7">Agregar Contacto</a><br/>
+    <a href="editContact.cmd" id="link8">Modificar Contacto</a><br/>
+    <a href="deleteContact.cmd" id="link9">Eliminar Contacto</a><br/>
+    <a href="queryContact.cmd" id="link10">Consultar Contacto</a>
 
     </body>
 </html>

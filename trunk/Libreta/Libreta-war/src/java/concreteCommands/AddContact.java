@@ -138,7 +138,7 @@ public class AddContact implements Command{
                         if(parameterTipo.startsWith("tipo")){
 
                             String tipo = request.getParameter(parameterTipo);
-                            System.out.println("//"+tipo);
+                            //System.out.println("//"+tipo);
                             if(tipo.equals("Casa")){
                                 dir.setTipoDir(TipoDireccion.CASA);
                             }else if(tipo.equals("Trabajo")){

@@ -118,18 +118,30 @@ public class SearchContact implements Command{
                     request.setAttribute("tel", contact.getTelefono());
                     request.setAttribute("email", contact.getEmail());
                     request.setAttribute("movil", contact.getMovil());
+                    request.setAttribute("listaDirecciones", contact.getDireccion());
 
                     request.setAttribute("selectId", contact.getId().toString());
 
+                    if(request.getParameter("action").equals("delete")){
 
+                        outcome = "SuccessDelete";
+                    }else{
+                        outcome = "SuccessEdit";
+                    }
 
                 }else{
+                    request.setAttribute("mensaje", "El contacto no existe!");
+                    if(request.getParameter("action").equals("delete")){
 
+                        outcome = "FailDelete";
+                    }else{
+                        outcome = "FailEdit";
+                    }
                 }
 
             }
             
-
+            return outcome;
 
         }catch(Exception ex){
             Logger.getLogger(SearchContact.class.getName()).log(Level.SEVERE, null, ex);

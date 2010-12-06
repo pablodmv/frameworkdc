@@ -5,7 +5,7 @@
 
 package concreteCommands;
 
-import ejb.ABMUsuarioLocal;
+import ejb.ABMContactoLocal;
 import frameworkp.Command;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,23 +21,24 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo Leites
  */
-public class deleteUser implements Command {
+public class DeleteContact implements Command {
+
 
     private Long id;
 
 
-    public deleteUser(){
-        
+    public DeleteContact(){
+
     }
 
     public Long getId() {
         return id;
     }
 
+    
     public void setId(Long id) {
         this.id = id;
     }
-
 
 
     @Override
@@ -47,36 +48,34 @@ public class deleteUser implements Command {
 
         try{
 
-            if(!request.getParameter("selectId").equals("")){
+            if(request.getParameter("selectId") != null){
                 this.id = Long.parseLong(request.getParameter("selectId"));
+                ABMContactoLocal ejbContacto = (ABMContactoLocal) this.lookupABMContactoLocal();
+                ejbContacto.eliminar(this.id);
 
-                ABMUsuarioLocal ejbUsuario = this.lookupABMUsuarioLocal();
-
-                ejbUsuario.eliminar(this.id);
-
-                request.setAttribute("mensaje", "El usuario fue eliminado con exito!");
+                request.setAttribute("mensaje", "El contacto fue eliminado con exito!");
 
                 outcome = "Success";
             }else{
-                request.setAttribute("mensaje", "El usuario no fue eliminado!");
+                request.setAttribute("mensaje", "El contacto no fue eliminado!");
                 outcome = "Fail";
             }
 
+
             return outcome;
-            
+
         }catch(Exception ex){
-            Logger.getLogger(deleteUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteContact.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
-        return outcome;
-
+        return "";
     }
 
-    private ABMUsuarioLocal lookupABMUsuarioLocal() {
+
+    private ABMContactoLocal lookupABMContactoLocal() {
         try {
             Context c = new InitialContext();
-            return (ABMUsuarioLocal) c.lookup("java:comp/env/ABMUsuario");
+            return (ABMContactoLocal) c.lookup("java:comp/env/ABMContacto");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
