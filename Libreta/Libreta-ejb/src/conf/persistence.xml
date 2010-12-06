@@ -4,7 +4,7 @@
     <provider>oracle.toplink.essentials.PersistenceProvider</provider>
     <jta-data-source>jdbc/libretaBD</jta-data-source>
     <properties>
-      <property name="toplink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="toplink.ddl-generation" value="create-tables"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -10,6 +10,7 @@ import entities.Direccion;
 import entities.Usuario;
 
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,6 +23,8 @@ import javax.persistence.Query;
  */
 @Stateless
 public class ABMContacto implements ABMContactoLocal {
+    @EJB
+    private ABMUsuarioLocal aBMUsuario;
 
 
        @PersistenceContext()
@@ -62,8 +65,16 @@ public class ABMContacto implements ABMContactoLocal {
     
     @Override
    public void eliminar(Long idContacto) {
-        Contacto contact= this.obtener(idContacto);
-        em.remove(contact);
+        try {
+            Contacto contact= this.obtener(idContacto);
+            contact.getDireccion().clear();
+            em.merge(contact);
+            em.remove(contact);
+        } catch (Exception e) {
+            e.toString();
+        }
+
+
     }
 
 
