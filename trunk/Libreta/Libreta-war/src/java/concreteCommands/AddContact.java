@@ -37,7 +37,7 @@ public class AddContact implements Command{
     private String movil;
     private String email;
     private List<Direccion> listaDirecciones = new ArrayList();
-    private Long idUsuario;
+    private String User;
     
     
     public AddContact(){
@@ -92,14 +92,15 @@ public class AddContact implements Command{
         this.telefono = telefono;
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public String getUser() {
+        return User;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUser(String Usuario) {
+        this.User = Usuario;
     }
 
+  
 
     
     @Override
@@ -114,7 +115,8 @@ public class AddContact implements Command{
             this.telefono = request.getParameter("tel");
             this.movil = request.getParameter("movil");
             this.email = request.getParameter("email");
-            this.idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+            //this.idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+            this.User=request.getRemoteUser();
 
 
             if(!this.nombre.equals("") && !this.apellido.equals("") && !this.telefono.equals("") && !this.movil.equals("") && !this.email.equals("")){
@@ -155,7 +157,7 @@ public class AddContact implements Command{
                 }
 
                 ABMUsuarioLocal ejbUsuario = (ABMUsuarioLocal) this.lookupABMUsuarioLocal();
-                Usuario usr = ejbUsuario.obtener(idUsuario);
+                Usuario usr = ejbUsuario.obtener(User);
 
                 ABMContactoLocal ejbContacto = (ABMContactoLocal) this.lookupABMContactoLocal();
                 outcome = ejbContacto.alta(nombre, apellido, telefono, movil, email, listaDirecciones, usr);

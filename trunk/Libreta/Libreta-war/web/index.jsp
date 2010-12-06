@@ -15,6 +15,7 @@
     </head>
     <body>
         <h1>Menu Provisorio</h1>
+        <h3>Usuario: <%=request.getRemoteUser() %></h3>
 
     <a href="Bienvenido.cmd" id="link1">Pagina de Bienvenida</a><br/>
     <a href="Login.cmd" id="link2">Login</a><br/>
@@ -26,6 +27,7 @@
     <a href="editContact.cmd" id="link8">Modificar Contacto</a><br/>
     <a href="deleteContact.cmd" id="link9">Eliminar Contacto</a><br/>
     <a href="queryContact.cmd" id="link10">Consultar Contacto</a>
+    <a href="Logout.cmd" id="link8">Cerrar sesion</a>
 
     </body>
 </html>

@@ -15,8 +15,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="js/checkBoxes.js" type="text/javascript"></script>
-        <script src="js/checkNomBox.js" type="text/javascript"></script>
-        <script src="js/checkApBox.js" type="text/javascript"></script>
         <title>Administracion - Consultar Usuarios</title>
     </head>
     <body>
@@ -26,12 +24,12 @@
 
             <table>
                 <tr>
-                    <td><input id="nombreOp" type="checkbox" name="nombreOp" onclick="setNomCheck()"/></td>
+                    <td><input id="nombreOp" type="checkbox" name="nombreOp" onclick="document.formulario.nombre.disabled=!document.formulario.nombre.disabled"/></td>
                     <td><label for="nombre">Nombre:</label></td>
                     <td><input id="nombre" type="text" disabled name="nombre" /></td>
                 </tr>
                 <tr>
-                    <td><input id="apellidoOp" type="checkbox" name="apellidoOp" onclick="setApCheck()"/></td>
+                    <td><input id="apellidoOp" type="checkbox" name="apellidoOp" onclick="document.formulario.apellido.disabled=!document.formulario.apellido.disabled"/></td>
                     <td><label for="apellido">Apellido:</label></td>
                     <td><input id="apellido" type="text" disabled name="apellido" /></td>
                 </tr>

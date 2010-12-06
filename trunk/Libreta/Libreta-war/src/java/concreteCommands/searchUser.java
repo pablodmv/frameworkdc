@@ -9,7 +9,9 @@ import ejb.ABMUsuarioLocal;
 import entities.Usuario;
 import frameworkp.Command;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,6 +75,7 @@ public class searchUser implements Command {
 
         String outcome = "";
         try {
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
             if(!request.getParameter("idUsuario").equals("")){
                 this.id = Long.parseLong(request.getParameter("idUsuario"));
@@ -84,10 +87,31 @@ public class searchUser implements Command {
                 if(usr != null){
                 
                     //El usuario fue obtenido con exito
+                    Date fecha=usr.getFechaNacimiento();
+
                     request.setAttribute("nombre", usr.getNombre());
                     request.setAttribute("apellido", usr.getApellido());
                     request.setAttribute("usuario", usr.getCredencial().getLogin());
+                    request.setAttribute("rol", usr.getCredencial().getRol().toString());
                     request.setAttribute("selectId", usr.getId().toString());
+                    request.setAttribute("fechaNacimiento", df.format(fecha));
+                    String Rol=usr.getCredencial().getRol().toString();
+
+                    //Me fijo el rol y lo paso por parametro para el combobox
+                    if (Rol.equalsIgnoreCase("Administrador")) {
+                        request.setAttribute("admin", true);
+                    
+                    }
+                    if (Rol.equalsIgnoreCase("Usuario")) {
+                        request.setAttribute("user", true);
+                    }
+                    if (Rol.equalsIgnoreCase("")) {
+                        request.setAttribute("default", true);
+                    }
+
+
+
+
 
                     if(request.getParameter("action").equals("delete")){
 
@@ -111,6 +135,7 @@ public class searchUser implements Command {
         
         } catch (Exception ex) {
             Logger.getLogger(searchUser.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("mensaje", "Dato no valido!");
         }
 
         return outcome;

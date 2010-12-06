@@ -66,6 +66,7 @@ public class deleteUser implements Command {
             
         }catch(Exception ex){
             Logger.getLogger(deleteUser.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("mensaje", "Dato no valido!");
         }
 
 

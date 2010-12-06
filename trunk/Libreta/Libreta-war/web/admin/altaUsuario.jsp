@@ -43,6 +43,7 @@
                      <td><label for="cbxRoles">Rol:</label></td>
                      <td>
                          <select id="cbxRoles" name="rol">
+                             <option>Seleccionar</option>
                             <option>Administrador</option>
                             <option>Usuario</option>
                         </select>

@@ -16,11 +16,12 @@
     </head>
     <body>
         <h1>Agregar Contacto</h1>
+       
 
         <form action="AddContact.cmd" id="formulario" name="formulario" method="get">
             <table>
                 <tbody>
-                    <tr><td><input id="idUsuario" type="hidden" value="1" name="idUsuario"/></td></tr>
+                   <!--  <tr><td><input id="idUsuario" type="hidden" value="1" name="idUsuario"/></td></tr>-->
                     <tr>
                      <td><label for="nombre">Nombre:</label></td>
                      <td><input id="nombre" value="" name="nombre"/></td>
