@@ -23,7 +23,7 @@ Dominio de seguridad con los siguientes datos:
 
 	Contexto JAAS: jdbcRealm
 
-	Nombre JNDI: jdbc/libretaDB
+	Nombre JNDI: jdbc/libretaBD
 
 	Tabla de usuario: CREDENCIALES
 
@@ -35,7 +35,13 @@ Dominio de seguridad con los siguientes datos:
 
 	Columna de nombre de grupo: ROL
 
-	Algoritmo Digest: none
+	Algoritmo Digest: NONE
 
 3) Hacer el Deploy de la aplicación y probarla ingresando a
 http://localhost:8080/Libreta-war/index.jsp
+
+4) Las sentencias SQL para poblar la base de datos son:
+
+INSERT INTO ADMINISTRADOR.CREDENCIALES (ID, LOGIN, PASSWORD, ROL) VALUES (2, 'admin', 'admin', 'Administrador');
+INSERT INTO ADMINISTRADOR.USUARIO (ID, NOMBRE, APELLIDO, FECHANACIMIENTO, CREDENCIAL_ID) VALUES (1, 'Admin', 'Admin', '2010-12-22', 2);
+UPDATE ADMINISTRADOR."SEQUENCE" SET SEQ_COUNT=3 WHERE SEQ_NAME='SEQ_GEN'
