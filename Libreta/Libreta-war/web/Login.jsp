@@ -16,14 +16,10 @@
     <body>
         <h1>Login</h1>
 
-        <form action="Check.cmd" method="get">
-            <label for="usuario">Usuario:</label>
-            <input id="usuario" value="" name="usr"/><br/>
-
-            <label for="pwd">Password:</label>
-            <input id="pwd" type="password" value="" name="pwd"/><br/>
-            
-            <button type="submit">Aceptar</button>
+         <form action="j_security_check" method="POST">
+            Usuario:<input type="text" name="j_username"><br>
+            Contrase&ntilde;a:<input type="password" name="j_password">
+            <input type="submit" value="Ingresar">
         </form>
 
     </body>

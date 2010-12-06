@@ -31,11 +31,11 @@ public class Setup extends HttpServlet {
 //     * @throws IOException if an I/O error occurs
 //     */
 //
-//    @Override
-//    public void init() throws ServletException {
-//        super.init();
-//        setupEJB.setup();
-//    }
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {

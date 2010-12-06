@@ -15,10 +15,10 @@
         <command path="/Login" forwardTo="/Login.jsp"/>
 
         <!--Comandos simples sobre Usuarios -->
-        <command path="/addUser" forwardTo="/altaUsuario.jsp"/>
-        <command path="/editUser" forwardTo="/EditarUsuario.jsp"/>
-        <command path="/deleteUser" forwardTo="/EliminarUsuario.jsp"/>
-        <command path="/queryUser" forwardTo="/QueryUsuario.jsp"/>
+        <command path="/addUser" forwardTo="/admin/altaUsuario.jsp"/>
+        <command path="/editUser" forwardTo="/admin/EditarUsuario.jsp"/>
+        <command path="/deleteUser" forwardTo="/admin/EliminarUsuario.jsp"/>
+        <command path="/queryUser" forwardTo="/admin/QueryUsuario.jsp"/>
 
         <!--Comandos simples sobre Contactos -->
         <command path="/addContact" forwardTo="/AltaContacto.jsp"/>
@@ -34,31 +34,36 @@
         <!--Comandos compuestos  sobre Usuarios  -->
 
         <command path="/AddUser" type="concreteCommands.addUser">
-            <forward name="Success" path="/altaUsuario.jsp"/>
-            <forward name="Fail" path="/altaUsuario.jsp"/>
+            <forward name="Success" path="/admin/altaUsuario.jsp"/>
+            <forward name="Fail" path="/admin/altaUsuario.jsp"/>
         </command>
 
         <command path="/SearchUser" type="concreteCommands.searchUser">
-            <forward name="SuccessDelete" path="/EliminarUsuario.jsp"/>
-            <forward name="SuccessEdit" path="/EditarUsuario.jsp"/>
-            <forward name="FailDelete" path="/EliminarUsuario.jsp"/>
-            <forward name="FailEdit" path="/EditarUsuario.jsp"/>
+            <forward name="SuccessDelete" path="/admin/EliminarUsuario.jsp"/>
+            <forward name="SuccessEdit" path="/admin/EditarUsuario.jsp"/>
+            <forward name="FailDelete" path="/admin/EliminarUsuario.jsp"/>
+            <forward name="FailEdit" path="/admin/EditarUsuario.jsp"/>
         </command>
 
         <command path="/DeleteUser" type="concreteCommands.deleteUser">
-            <forward name="Success" path="/EliminarUsuario.jsp"/>
-            <forward name="Fail" path="/EliminarUsuario.jsp"/>
+            <forward name="Success" path="/admin/EliminarUsuario.jsp"/>
+            <forward name="Fail" path="/admin/EliminarUsuario.jsp"/>
         </command>
 
         <command path="/QueryUser" type="concreteCommands.QueryUser">
-            <forward name="Success" path="/QueryUsuario.jsp"/>
-            <forward name="Fail" path="/QueryUsuario.jsp"/>
+            <forward name="Success" path="/admin/QueryUsuario.jsp"/>
+            <forward name="Fail" path="/admin/QueryUsuario.jsp"/>
         </command>
 
         <!--Comandos compuestos  sobre Contactos  -->
         <command path="/AddContact" type="concreteCommands.AddContact">
             <forward name="Success" path="/AltaContacto.jsp"/>
             <forward name="Fail" path="/AltaContacto.jsp"/>
+        </command>
+        
+        <command path="/EditUser" type="concreteCommands.editUser">
+            <forward name="Success" path="/admin/EditarUsuario.jsp"/>
+            <forward name="Fail" path="/admin/EditarUsuario.jsp"/>
         </command>
 
         <command path="/SearchContact" type="concreteCommands.SearchContact">
@@ -77,6 +82,15 @@
             <forward name="Success" path="/QueryContacto.jsp"/>
             <forward name="Fail" path="/QueryContacto.jsp"/>
         </command>
+
+          <!--Comandos Generales  -->
+          <command path="/Logout" type="concreteCommands.logoutUser">
+            <forward name="Success" path="/Login.jsp"/>
+            <forward name="Fail" path="/Login.jsp"/>
+        </command>
+
+
+        
 
     </command-mappings>
 </mvc-config>

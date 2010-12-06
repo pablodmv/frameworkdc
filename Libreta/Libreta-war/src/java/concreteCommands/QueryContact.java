@@ -55,6 +55,7 @@ public class QueryContact implements Command {
 
         String outcome="Fail";
 
+
         try{
 
 
