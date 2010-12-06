@@ -13,17 +13,25 @@
     <command-mappings>
         <command path="/Bienvenido" forwardTo="/Bienvenido.jsp"/>
         <command path="/Login" forwardTo="/Login.jsp"/>
+
+        <!--Comandos simples sobre Usuarios -->
         <command path="/addUser" forwardTo="/altaUsuario.jsp"/>
         <command path="/editUser" forwardTo="/EditarUsuario.jsp"/>
         <command path="/deleteUser" forwardTo="/EliminarUsuario.jsp"/>
         <command path="/queryUser" forwardTo="/QueryUsuario.jsp"/>
 
+        <!--Comandos simples sobre Contactos -->
         <command path="/addContact" forwardTo="/AltaContacto.jsp"/>
+        <command path="/deleteContact" forwardTo="/EliminarContacto.jsp"/>
+        <command path="/editContact" forwardTo="/EditarContacto.jsp"/>
+        <command path="/queryContact" forwardTo="/QueryContacto.jsp"/>
 
         <command path="/Check" type="concreteCommands.ComandoConcreto">
             <forward name="Success" path="/Bienvenido.jsp"/>
             <forward name="Fail" path="/Error.jsp"/>
         </command>
+
+        <!--Comandos compuestos  sobre Usuarios  -->
 
         <command path="/AddUser" type="concreteCommands.addUser">
             <forward name="Success" path="/altaUsuario.jsp"/>
@@ -47,11 +55,28 @@
             <forward name="Fail" path="/QueryUsuario.jsp"/>
         </command>
 
+        <!--Comandos compuestos  sobre Contactos  -->
         <command path="/AddContact" type="concreteCommands.AddContact">
             <forward name="Success" path="/AltaContacto.jsp"/>
             <forward name="Fail" path="/AltaContacto.jsp"/>
         </command>
 
+        <command path="/SearchContact" type="concreteCommands.SearchContact">
+            <forward name="SuccessDelete" path="/EliminarContacto.jsp"/>
+            <forward name="SuccessEdit" path="/EditarContacto.jsp"/>
+            <forward name="FailDelete" path="/EliminarContacto.jsp"/>
+            <forward name="FailEdit" path="/EditarContacto.jsp"/>
+        </command>
+
+        <command path="/DeleteContact" type="concreteCommands.DeleteContact">
+            <forward name="Success" path="/EliminarContacto.jsp"/>
+            <forward name="Fail" path="/EliminarContacto.jsp"/>
+        </command>
+
+        <command path="/QueryContact" type="concreteCommands.QueryContacto">
+            <forward name="Success" path="/QueryContacto.jsp"/>
+            <forward name="Fail" path="/QueryContacto.jsp"/>
+        </command>
 
     </command-mappings>
 </mvc-config>
