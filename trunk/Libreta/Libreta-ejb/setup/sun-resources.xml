@@ -12,4 +12,9 @@
     </jdbc-connection-pool>
     <!--<jdbc-resource enabled="true" jndi-name="jdbc/libretaDB" object-type="user" pool-name="derby_net_libretaBD_administradorPool"/>-->
     <jdbc-resource enabled="true" jndi-name="jdbc/libretaBD" object-type="user" pool-name="derby_net_libretaBD_administradorPool"/>
+    <admin-object-resource enabled="true" jndi-name="jms/bitacoraLogger"  res-type="javax.jms.Queue"  res-adapter="jmsra">
+        <property name="Name" value="PhysicalQueue"/>
+    </admin-object-resource>
+    <connector-connection-pool name="jms/bitacoraLoggerFactoryPool"  connection-definition-name="javax.jms.QueueConnectionFactory"  resource-adapter-name="jmsra"/>
+    <connector-resource enabled="true" jndi-name="jms/bitacoraLoggerFactory" pool-name="jms/bitacoraLoggerFactoryPool"  />
 </resources>

@@ -5,9 +5,11 @@
 
 package ejb;
 
+import entities.Bitacora;
 import entities.Contacto;
 import entities.Direccion;
 import entities.Usuario;
+import java.util.Date;
 
 import java.util.List;
 import javax.ejb.EJB;
@@ -23,8 +25,10 @@ import javax.persistence.Query;
  */
 @Stateless
 public class ABMContacto implements ABMContactoLocal {
+
+
     @EJB
-    private ABMUsuarioLocal aBMUsuario;
+    private LoggerBeanLocal loggerBean;
 
 
        @PersistenceContext()
@@ -33,7 +37,7 @@ public class ABMContacto implements ABMContactoLocal {
   
 
     @Override
-    public String alta(String nombre, String apellido, String telefono, String movil, String email,List<Direccion>listaDir,Usuario user) {
+    public String alta(String nombre, String apellido, String telefono, String movil, String email,List<Direccion>listaDir,Usuario user, String userLogin) {
         Contacto contact= new Contacto();
         contact.setNombre(nombre);
         contact.setApellido(apellido);
@@ -45,6 +49,16 @@ public class ABMContacto implements ABMContactoLocal {
         try {
             em.persist(contact);
             em.merge(user);
+            em.flush();
+
+            //Logueo a Bitacora
+             Bitacora bit = new Bitacora();
+             bit.setFechaHora(new Date());
+             bit.setTipoAccion("altaContacto");
+             bit.setUserLogin(userLogin);
+
+             loggerBean.log(bit);
+
             return "Success";
         } catch (Exception e) {
             return e.toString();
@@ -64,12 +78,22 @@ public class ABMContacto implements ABMContactoLocal {
  
     
     @Override
-   public void eliminar(Long idContacto) {
+   public void eliminar(Long idContacto,String userLogin) {
         try {
             Contacto contact= this.obtener(idContacto);
             contact.getDireccion().clear();
             em.merge(contact);
             em.remove(contact);
+            em.flush();
+
+            //Logueo a Bitacora
+             Bitacora bit = new Bitacora();
+             bit.setFechaHora(new Date());
+             bit.setTipoAccion("eliminarContacto");
+             bit.setUserLogin(userLogin);
+
+             loggerBean.log(bit);
+
         } catch (Exception e) {
             e.toString();
         }
@@ -93,18 +117,36 @@ public class ABMContacto implements ABMContactoLocal {
     }
 
     @Override
-    public List<Contacto> consultar(String nombre, String apellido) {
+    public List<Contacto> consultar(String nombre, String apellido, String userLogin) {
         String jpl = "SELECT c FROM Contacto c WHERE c.nombre LIKE :nom AND c.apellido LIKE :ape";
         Query q = em.createQuery(jpl);
         q.setParameter("nom", "%"+nombre+"%");
         q.setParameter("ape", "%"+apellido+"%");
+
+        //Logueo a Bitacora
+             Bitacora bit = new Bitacora();
+             bit.setFechaHora(new Date());
+             bit.setTipoAccion("consultarContacto");
+             bit.setUserLogin(userLogin);
+
+             loggerBean.log(bit);
+
         return (List<Contacto>)q.getResultList();
     }
 
     @Override
-    public List<Contacto> traerTodos() {
+    public List<Contacto> traerTodos(String userLogin) {
          String jpl = "SELECT c FROM Usuario c";
         Query q = em.createQuery(jpl);
+
+        //Logueo a Bitacora
+             Bitacora bit = new Bitacora();
+             bit.setFechaHora(new Date());
+             bit.setTipoAccion("obtenerTodosContactos");
+             bit.setUserLogin(userLogin);
+
+             loggerBean.log(bit);
+
         return (List<Contacto>)q.getResultList();
     }
  

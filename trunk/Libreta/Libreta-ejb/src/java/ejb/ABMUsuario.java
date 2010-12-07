@@ -5,6 +5,7 @@
 
 package ejb;
 
+import entities.Bitacora;
 import entities.Usuario;
 import entities.Credenciales;
 import java.io.UnsupportedEncodingException;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +28,9 @@ import javax.persistence.Query;
 @Stateless
 public class ABMUsuario implements ABMUsuarioLocal {
 
+    @EJB
+    private LoggerBeanLocal loggerBean;
+
 
      @PersistenceContext()
     private EntityManager em;
@@ -33,7 +38,7 @@ public class ABMUsuario implements ABMUsuarioLocal {
 
 
     @Override
-    public String alta(String login, String password, String nombre, String apellido, Date fNacimiento, String rol) {
+    public String alta(String login, String password, String nombre, String apellido, Date fNacimiento, String rol, String userLogin) {
 
         Usuario user= new Usuario();
         Credenciales cred = new Credenciales();
@@ -48,6 +53,16 @@ public class ABMUsuario implements ABMUsuarioLocal {
         try {
             //em.persist(cred);
              em.persist(user);
+             em.flush();
+
+             //Logueo a Bitacora
+             Bitacora bit = new Bitacora();
+             bit.setFechaHora(new Date());
+             bit.setTipoAccion("altaUsuario");
+             bit.setUserLogin(userLogin);
+
+             loggerBean.log(bit);
+
              return "Success";
         } catch (Exception e) {
             return "Fail";
@@ -79,13 +94,22 @@ public class ABMUsuario implements ABMUsuarioLocal {
 //    }
 
     @Override
-    public void eliminar(Long idUsuario) {
+    public void eliminar(Long idUsuario, String userLogin) {
         Usuario user= this.obtener(idUsuario);
         em.remove(user);
+        em.flush();
+
+        //Logueo a Bitacora
+             Bitacora bit = new Bitacora();
+             bit.setFechaHora(new Date());
+             bit.setTipoAccion("eliminarUsuario");
+             bit.setUserLogin(userLogin);
+
+             loggerBean.log(bit);
     }
 
     @Override
-    public String modificar(Long idUsuario, String nombre, String apellido, Date fNacimiento, String rol) {
+    public String modificar(Long idUsuario, String nombre, String apellido, Date fNacimiento, String rol,String userLogin) {
 
         Usuario user = this.obtener(idUsuario);
         user.setNombre(nombre);
@@ -94,6 +118,15 @@ public class ABMUsuario implements ABMUsuarioLocal {
         user.getCredencial().setRol(rol);
         try {
         em.merge(user);
+        em.flush();
+        
+        //Logueo a Bitacora
+             Bitacora bit = new Bitacora();
+             bit.setFechaHora(new Date());
+             bit.setTipoAccion("modificarUsuario");
+             bit.setUserLogin(userLogin);
+
+             loggerBean.log(bit);
         return "Success";
         } catch (Exception e) {
             return "Fail";
@@ -120,18 +153,36 @@ public class ABMUsuario implements ABMUsuarioLocal {
     }
 
     @Override
-    public List<Usuario> consultar(String nombre, String apellido) {
+    public List<Usuario> consultar(String nombre, String apellido, String userLogin) {
         String jpl = "SELECT u FROM Usuario u WHERE u.nombre LIKE :nom AND u.apellido LIKE :ape";
         Query q = em.createQuery(jpl);
         q.setParameter("nom", "%"+nombre+"%");
         q.setParameter("ape", "%"+apellido+"%");
+
+        //Logueo a Bitacora
+             Bitacora bit = new Bitacora();
+             bit.setFechaHora(new Date());
+             bit.setTipoAccion("consultarUsuario");
+             bit.setUserLogin(userLogin);
+
+             loggerBean.log(bit);
+
         return (List<Usuario>)q.getResultList();
     }
 
     @Override
-    public List<Usuario> traerTodos() {
+    public List<Usuario> traerTodos(String userLogin) {
          String jpl = "SELECT u FROM Usuario u";
         Query q = em.createQuery(jpl);
+
+        //Logueo a Bitacora
+             Bitacora bit = new Bitacora();
+             bit.setFechaHora(new Date());
+             bit.setTipoAccion("obtenerTodosUsuario");
+             bit.setUserLogin(userLogin);
+
+             loggerBean.log(bit);
+
         return (List<Usuario>)q.getResultList();
     }
 
