@@ -30,12 +30,12 @@
                     <td><input id="nombre" type="text" disabled name="nombre" value="" /></td>
                 </tr>
                 <tr>
-                    <td><input id="apellidoOp" type="checkbox" name="apellidoOp" onclick=""/></td>
+                    <td><input id="apellidoOp" type="checkbox" name="apellidoOp" onclick="setApCheck()"/></td>
                     <td><label for="apellido">Apellido:</label></td>
                     <td><input id="apellido" type="text" disabled name="apellido" value="" /></td>
                 </tr>
                 <tr>
-                    <td><input id="getAll" type="checkbox" name="getAll" onclick="setApCheck()"/></td>
+                    <td><input id="getAll" type="checkbox" name="getAll" onclick="setCheckBox()"/></td>
                     <td><label>Obtener Todos:</label>  </td>
                 </tr>
                 <tr>
@@ -55,7 +55,7 @@
                 </tr>
                 <%
                 if(request.getAttribute("listaContactos") != null){
-                List<Contacto> listaContactos = (List<Contacto>)request.getAttribute("listaUsuarios");
+                List<Contacto> listaContactos = (List<Contacto>)request.getAttribute("listaContactos");
                 if(listaContactos.size() > 0){
                     for(Contacto contact : listaContactos){
                 %>

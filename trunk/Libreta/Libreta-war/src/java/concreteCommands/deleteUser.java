@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class deleteUser implements Command {
 
     private Long id;
+    private String userLogin;
 
 
     public deleteUser(){
@@ -36,6 +37,14 @@ public class deleteUser implements Command {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
 
@@ -52,7 +61,8 @@ public class deleteUser implements Command {
 
                 ABMUsuarioLocal ejbUsuario = this.lookupABMUsuarioLocal();
 
-                ejbUsuario.eliminar(this.id);
+                this.userLogin = request.getRemoteUser();
+                ejbUsuario.eliminar(this.id,this.userLogin);
 
                 request.setAttribute("mensaje", "El usuario fue eliminado con exito!");
 
