@@ -37,7 +37,8 @@ public class AddContact implements Command{
     private String movil;
     private String email;
     private List<Direccion> listaDirecciones = new ArrayList();
-    private String User;
+    private Long idUsuario;
+    private String userLogin;
     
     
     public AddContact(){
@@ -92,15 +93,23 @@ public class AddContact implements Command{
         this.telefono = telefono;
     }
 
-    public String getUser() {
-        return User;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUser(String Usuario) {
-        this.User = Usuario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-  
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
+
 
     
     @Override
@@ -115,8 +124,8 @@ public class AddContact implements Command{
             this.telefono = request.getParameter("tel");
             this.movil = request.getParameter("movil");
             this.email = request.getParameter("email");
-            //this.idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-            this.User=request.getRemoteUser();
+            this.idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+            //this.User=request.getRemoteUser();
 
 
             if(!this.nombre.equals("") && !this.apellido.equals("") && !this.telefono.equals("") && !this.movil.equals("") && !this.email.equals("")){
@@ -157,10 +166,11 @@ public class AddContact implements Command{
                 }
 
                 ABMUsuarioLocal ejbUsuario = (ABMUsuarioLocal) this.lookupABMUsuarioLocal();
-                Usuario usr = ejbUsuario.obtener(User);
+                Usuario usr = ejbUsuario.obtener(idUsuario);
 
                 ABMContactoLocal ejbContacto = (ABMContactoLocal) this.lookupABMContactoLocal();
-                outcome = ejbContacto.alta(nombre, apellido, telefono, movil, email, listaDirecciones, usr);
+                this.userLogin = request.getRemoteUser();
+                outcome = ejbContacto.alta(nombre, apellido, telefono, movil, email, listaDirecciones, usr,this.userLogin);
 
                 if(outcome.equals("Success")){
                     request.setAttribute("mensaje", "Contacto Guardado con Exito!");
@@ -177,9 +187,6 @@ public class AddContact implements Command{
         }catch(Exception ex){
             Logger.getLogger(AddContact.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
-
 
         return "";
     }

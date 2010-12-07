@@ -34,6 +34,7 @@ public class addUser implements Command {
     private String pwd;
     private Date fNac;
     private String rol;
+    private String userLogin;
 
     public addUser() {
     }
@@ -86,6 +87,15 @@ public class addUser implements Command {
         this.rol = rol;
     }
 
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
+
   @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -102,11 +112,12 @@ public class addUser implements Command {
                 
                 this.fNac = df.parse(request.getParameter("fNac"));
                 this.rol = request.getParameter("rol");
+                this.userLogin = request.getRemoteUser();
                 Context ctx = new InitialContext();
                 ABMUsuarioLocal ejbUsuario = (ABMUsuarioLocal) ctx.lookup("java:comp/env/ABMUsuario");
 
 
-                outcome = ejbUsuario.alta(this.login,this.pwd,this.nombre,this.apellido,this.fNac,this.rol);
+                outcome = ejbUsuario.alta(this.login,this.pwd,this.nombre,this.apellido,this.fNac,this.rol,this.userLogin);
 
                 if(outcome.equals("Success")){
                     request.setAttribute("mensaje", "Usuario Guardado con Exito!");

@@ -25,6 +25,7 @@ public class DeleteContact implements Command {
 
 
     private Long id;
+    private String userLogin;
 
 
     public DeleteContact(){
@@ -40,6 +41,16 @@ public class DeleteContact implements Command {
         this.id = id;
     }
 
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
+
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,7 +62,10 @@ public class DeleteContact implements Command {
             if(request.getParameter("selectId") != null){
                 this.id = Long.parseLong(request.getParameter("selectId"));
                 ABMContactoLocal ejbContacto = (ABMContactoLocal) this.lookupABMContactoLocal();
-                ejbContacto.eliminar(this.id);
+
+                this.userLogin = request.getRemoteUser();
+
+                ejbContacto.eliminar(this.id,this.userLogin);
 
                 request.setAttribute("mensaje", "El contacto fue eliminado con exito!");
 

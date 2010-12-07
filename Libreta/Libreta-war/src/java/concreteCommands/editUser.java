@@ -36,6 +36,13 @@ public class editUser implements Command {
     private String apellido;
     private Date fnac;
     private String rol;
+    private String userLogin;
+
+    public editUser(){
+
+    }
+
+    
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,12 +59,12 @@ public class editUser implements Command {
             if(!request.getParameter("fNac").equals("") && !this.nombre.equals("") && !this.apellido.equals("") && !this.rol.equals("")){
 
              this.fnac = df.parse(request.getParameter("fNac"));
-                String rol = request.getParameter("rol");
+                rol = request.getParameter("rol");
                 Context ctx = new InitialContext();
                 ABMUsuarioLocal ejbUsuario = (ABMUsuarioLocal) ctx.lookup("java:comp/env/ABMUsuario");
 
-
-                outcome = ejbUsuario.modificar(id, nombre, apellido, fnac, rol);
+                this.userLogin = request.getRemoteUser();
+                outcome = ejbUsuario.modificar(id, nombre, apellido, fnac, rol,this.userLogin);
 
                 if(outcome.equals("Success")){
                     request.setAttribute("mensaje", "Usuario actualizado con Exito!");

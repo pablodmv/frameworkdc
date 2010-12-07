@@ -27,6 +27,7 @@ public class QueryUser implements Command {
 
     private String nombre = "";
     private String apellido = "";
+    private String userLogin;
 
     public QueryUser(){
         
@@ -48,6 +49,14 @@ public class QueryUser implements Command {
         this.nombre = nombre;
     }
 
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -65,12 +74,14 @@ public class QueryUser implements Command {
             if(request.getParameter("apellido") != null){
                 this.apellido = request.getParameter("apellido");
             }
+            this.userLogin = request.getRemoteUser();
 
             if(this.nombre.equals("") && this.apellido.equals("")){
 
                 ABMUsuarioLocal ejbUsuario = this.lookupABMUsuarioLocal();
 
-                listaUsuarios = ejbUsuario.traerTodos();
+                
+                listaUsuarios = ejbUsuario.traerTodos(this.userLogin);
 
                 if(listaUsuarios.size() > 0){
                     request.setAttribute("listaUsuarios", listaUsuarios);
@@ -84,7 +95,7 @@ public class QueryUser implements Command {
             }else{
                 ABMUsuarioLocal ejbUsuario = this.lookupABMUsuarioLocal();
 
-                listaUsuarios = ejbUsuario.consultar(this.nombre, this.apellido);
+                listaUsuarios = ejbUsuario.consultar(this.nombre, this.apellido, this.userLogin);
 
                 if(listaUsuarios.size() > 0){
                     request.setAttribute("listaUsuarios", listaUsuarios);

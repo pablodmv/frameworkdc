@@ -78,7 +78,7 @@
             <forward name="Fail" path="/EliminarContacto.jsp"/>
         </command>
 
-        <command path="/QueryContact" type="concreteCommands.QueryContacto">
+        <command path="/QueryContact" type="concreteCommands.QueryContact">
             <forward name="Success" path="/QueryContacto.jsp"/>
             <forward name="Fail" path="/QueryContacto.jsp"/>
         </command>

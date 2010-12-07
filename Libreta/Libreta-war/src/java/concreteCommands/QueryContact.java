@@ -9,6 +9,7 @@ import ejb.ABMContactoLocal;
 import entities.Contacto;
 import frameworkp.Command;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ public class QueryContact implements Command {
 
     private String nombre = "";
     private String apellido = "";
+    private String userLogin;
     
     
     public QueryContact(){
@@ -49,6 +51,15 @@ public class QueryContact implements Command {
         this.nombre = nombre;
     }
 
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,20 +81,25 @@ public class QueryContact implements Command {
 
             List<Contacto> listaContactos;
             ABMContactoLocal ejbContacto = (ABMContactoLocal) this.lookupABMContactoLocal();
-            if(this.nombre.equals("") && this.apellido.equals("")){
-                listaContactos = ejbContacto.traerTodos();
-            }else{
-                listaContactos = ejbContacto.consultar(nombre, apellido);
-            }
 
+            this.userLogin = request.getRemoteUser();
+
+            if(this.nombre.equals("") && this.apellido.equals("")){
+                listaContactos = ejbContacto.traerTodos(this.userLogin);
+            }else{
+                listaContactos = ejbContacto.consultar(nombre, apellido, this.userLogin);
+            }
+            //System.out.println("QueryContact execute");
             if(listaContactos.size() > 0){
+                
                     request.setAttribute("listaContactos", listaContactos);
                     outcome = "Success";
 
-                }else{
+            }else{
+                System.out.println("else - QueryContact execute");
                     request.setAttribute("mensaje", "No se encontraron contactos bajo los filtros determinados.");
                     outcome="Fail";
-                }
+            }
 
             return outcome;
 
