@@ -6,6 +6,9 @@
 package entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +23,9 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinTable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 
 /**
  *
@@ -51,6 +57,7 @@ public class Usuario implements Serializable {
 
 //    @JoinColumn
 //    @OneToMany
+    
     @OneToMany(cascade=CascadeType.ALL)
     @JoinTable(name="USERCONTACT")
    private List<Contacto> contactos;
@@ -79,8 +86,11 @@ public class Usuario implements Serializable {
         this.apellido = apellido;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
+    public String getFechaNacimiento() {
+      
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            return df.format(fechaNacimiento);
+      
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) {

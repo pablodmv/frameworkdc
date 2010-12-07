@@ -25,7 +25,7 @@ public class Credenciales implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length=120, nullable=false)
+    @Column(length=120, nullable=false,unique=true)
     private String Login;
     @Column(length=120, nullable=false)
     private String Password;
