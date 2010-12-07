@@ -26,7 +26,7 @@ public class Bitacora implements Serializable {
     private Long id;
 
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date fechaHora;
 
     @Column

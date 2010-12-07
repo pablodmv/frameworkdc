@@ -188,11 +188,18 @@ public class ABMUsuario implements ABMUsuarioLocal {
 
     @Override
     public Usuario obtener(String login) {
-        String jpl = "Select u FROM Usuario u,Credenciales c WHERE u.CREDENCIAL_ID=c.ID AND c.login=:usuario";
-        Query q=em.createNamedQuery(jpl);
-        q.setParameter("usuario", login);
-        List<Usuario> userlist = (List<Usuario>) q.getResultList();
-        return userlist.get(0);
+        try {
+      //  String jpl = "Select u FROM Usuario u";
+        //String jpl = "Select c.id FROM Credenciales c WHERE c.Login=:user";
+            String jpl = "Select u FROM Usuario u, Credenciales c WHERE c=u.credencial AND c.Login=:user";
+        Query q=em.createQuery(jpl);
+        q.setParameter("user", login);
+        return (Usuario) q.getSingleResult();
+        
+        } catch (Exception e) {
+            return null;
+        }
+        
 
     }
     
