@@ -4,7 +4,7 @@
  */
 
 package concreteCommands;
-
+import java.util.Date;
 import ejb.ABMUsuarioLocal;
 import entities.Usuario;
 import frameworkp.Command;
@@ -98,6 +98,9 @@ public class QueryUser implements Command {
                 listaUsuarios = ejbUsuario.consultar(this.nombre, this.apellido, this.userLogin);
 
                 if(listaUsuarios.size() > 0){
+                    //Arreglo para mostrar fecha
+
+
                     request.setAttribute("listaUsuarios", listaUsuarios);
                     outcome = "Success";
 
@@ -112,7 +115,6 @@ public class QueryUser implements Command {
         }catch(Exception ex){
             Logger.getLogger(QueryUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return outcome;
     }
 

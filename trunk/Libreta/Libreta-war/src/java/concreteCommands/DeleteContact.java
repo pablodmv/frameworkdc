@@ -6,6 +6,8 @@
 package concreteCommands;
 
 import ejb.ABMContactoLocal;
+import ejb.ABMUsuarioLocal;
+import entities.Usuario;
 import frameworkp.Command;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -26,6 +28,17 @@ public class DeleteContact implements Command {
 
     private Long id;
     private String userLogin;
+    private Usuario User;
+
+    public Usuario getUser() {
+        return User;
+    }
+
+    public void setUser(Usuario User) {
+        this.User = User;
+    }
+
+   
 
 
     public DeleteContact(){
@@ -58,14 +71,16 @@ public class DeleteContact implements Command {
         String outcome= "";
 
         try{
+            this.userLogin = request.getRemoteUser();
 
             if(request.getParameter("selectId") != null){
                 this.id = Long.parseLong(request.getParameter("selectId"));
                 ABMContactoLocal ejbContacto = (ABMContactoLocal) this.lookupABMContactoLocal();
+                ABMUsuarioLocal ejbUsuario = (ABMUsuarioLocal) this.lookupABMUsuarioLocal();
+                
+                Usuario objUser = ejbUsuario.obtener(userLogin);
 
-                this.userLogin = request.getRemoteUser();
-
-                ejbContacto.eliminar(this.id,this.userLogin);
+                ejbContacto.eliminar(this.id,objUser,this.userLogin);
 
                 request.setAttribute("mensaje", "El contacto fue eliminado con exito!");
 
@@ -90,6 +105,16 @@ public class DeleteContact implements Command {
         try {
             Context c = new InitialContext();
             return (ABMContactoLocal) c.lookup("java:comp/env/ABMContacto");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private ABMUsuarioLocal lookupABMUsuarioLocal() {
+        try {
+            Context c = new InitialContext();
+            return (ABMUsuarioLocal) c.lookup("java:comp/env/ABMUsuario");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

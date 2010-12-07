@@ -97,7 +97,7 @@ public class addUser implements Command {
 
 
   @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response){
 
       String outcome = "Fail";
       try {
@@ -130,9 +130,9 @@ public class addUser implements Command {
             
             return outcome;
         
+       
         } catch (ParseException ex) {
             Logger.getLogger(addUser.class.getName()).log(Level.SEVERE, null, ex);
-
         } catch (NamingException ex) {
             Logger.getLogger(ComandoConcreto.class.getName()).log(Level.SEVERE, "No se pudo encontrar el EJB", ex);
         }

@@ -45,6 +45,11 @@
             <forward name="FailEdit" path="/admin/EditarUsuario.jsp"/>
         </command>
 
+        <command path="/EditUser" type="concreteCommands.editUser">
+            <forward name="Success" path="/admin/EditarUsuario.jsp"/>
+            <forward name="Fail" path="/admin/EditarUsuario.jsp"/>
+        </command>
+
         <command path="/DeleteUser" type="concreteCommands.deleteUser">
             <forward name="Success" path="/admin/EliminarUsuario.jsp"/>
             <forward name="Fail" path="/admin/EliminarUsuario.jsp"/>
@@ -61,9 +66,9 @@
             <forward name="Fail" path="/AltaContacto.jsp"/>
         </command>
         
-        <command path="/EditUser" type="concreteCommands.editUser">
-            <forward name="Success" path="/admin/EditarUsuario.jsp"/>
-            <forward name="Fail" path="/admin/EditarUsuario.jsp"/>
+        <command path="/EditContact" type="concreteCommands.EditContact">
+            <forward name="Success" path="/EditarContacto.jsp"/>
+            <forward name="Fail" path="/EditarContacto.jsp"/>
         </command>
 
         <command path="/SearchContact" type="concreteCommands.SearchContact">

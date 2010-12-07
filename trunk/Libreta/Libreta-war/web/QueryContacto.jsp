@@ -20,6 +20,7 @@
     </head>
     <body>
         <h1>Consultar Contacto</h1>
+         <h3>Utilice la busqueda para eliminar y/o borrar</h3>
 
         <form action="QueryContact.cmd" name="formulario" method="get">
 
@@ -42,6 +43,8 @@
                     <td><button type="submit">Buscar</button></td>
                 </tr>
             </table>
+             </form>
+
             <br/>
             <br/>
             <table border="1" width="400px" >
@@ -52,6 +55,7 @@
                     <th>Telefono</th>
                     <th>Movil</th>
                     <th>EMail</th>
+                    <th>Accion</th>
                 </tr>
                 <%
                 if(request.getAttribute("listaContactos") != null){
@@ -66,6 +70,19 @@
                     <td><%=contact.getTelefono() %></td>
                     <td><%=contact.getMovil() %></td>
                     <td><%=contact.getEmail() %></td>
+                    <td>
+                    <form id="buscarForm" action="SearchContact.cmd" method="get">
+                    <input id="action" type="hidden" value="edit" name="action"/>
+                    <input id="idContacto" value="<%=contact.getId()%>" type="hidden" name="idContacto"/>
+                    <button type="submit">Editar</button>
+                    </form>
+                        <form id="buscarForm" action="SearchContact.cmd" method="get">
+                        <input id="action" type="hidden" value="delete" name="action"/>
+                        <input id="idContacto" value="<%=contact.getId()%>" type="hidden" name="idContacto"/>
+                        <button type="submit">Borrar</button>
+                        </form>
+                    </td>
+                    
                 </tr>
                 <%}%>
                 <%}%>
@@ -75,7 +92,7 @@
             <%if(request.getAttribute("mensaje") != null){%>
             <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
             <%}%>
-        </form>
+       
 
 
     </body>
