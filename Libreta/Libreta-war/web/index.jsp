@@ -15,18 +15,18 @@
     </head>
     <body>
         <h1>Menu Provisorio</h1>
-        <h3>Usuario: <%=request.getRemoteUser() %></h3>
+        <h3>Bienvenido &nbsp; <%=request.getRemoteUser() %></h3>
 
-    <a href="Bienvenido.cmd" id="link1">Pagina de Bienvenida</a><br/>
-    <a href="Login.cmd" id="link2">Login</a><br/>
+   <!-- <a href="Bienvenido.cmd" id="link1">Pagina de Bienvenida</a><br/>
+    <a href="Login.cmd" id="link2">Login</a><br/>-->
     <a href="addUser.cmd" id="link3">Agregar Usuario</a><br/>
-    <a href="editUser.cmd" id="link4">Modificar Usuario</a><br/>
-    <a href="deleteUser.cmd" id="link5">Eliminar Usuario</a><br/>
-    <a href="queryUser.cmd" id="link6">Consultar Usuario</a><br/><br/>
+    <a href="queryUser.cmd" id="link4">Gestionar Usuarios</a><br/>
+    <!--<a href="deleteUser.cmd" id="link5">Eliminar Usuario</a><br/>
+    <a href="queryUser.cmd" id="link6">Consultar Usuario</a><br/><br/> -->
     <a href="addContact.cmd" id="link7">Agregar Contacto</a><br/>
-    <a href="editContact.cmd" id="link8">Modificar Contacto</a><br/>
-    <a href="deleteContact.cmd" id="link9">Eliminar Contacto</a><br/>
-    <a href="queryContact.cmd" id="link10">Consultar Contacto</a>
+    <!--<a href="editContact.cmd" id="link8">Modificar Contacto</a><br/>
+    <a href="deleteContact.cmd" id="link9">Eliminar Contacto</a><br/>-->
+    <a href="queryContact.cmd" id="link10">Gestionar Contactos</a><br>
     <a href="Logout.cmd" id="link8">Cerrar sesion</a>
 
     </body>

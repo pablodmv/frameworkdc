@@ -78,6 +78,13 @@
             <url-pattern>/AddContact.cmd</url-pattern>
             <url-pattern>/addContact.cmd</url-pattern>
             <url-pattern>/Logout.cmd</url-pattern>
+            <url-pattern>/editContact.cmd</url-pattern>
+            <url-pattern>/EditContact.cmd</url-pattern>
+            <url-pattern>/deleteContact.cmd</url-pattern>
+            <url-pattern>/DeleteContact.cmd</url-pattern>
+            <url-pattern>/queryContact.cmd</url-pattern>
+            <url-pattern>/QueryContact.cmd</url-pattern>
+            <url-pattern>/SearchContact.cmd</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>

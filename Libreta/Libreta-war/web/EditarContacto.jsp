@@ -29,7 +29,7 @@
                 </tr>
             </table>
         </form>
-        <form action="DeleteContact.cmd" id="formulario" method="get">
+        <form action="EditContact.cmd" id="formulario" method="get">
             <table>
                 <tbody>
                     <tr>
@@ -118,25 +118,13 @@
                 <%}%>
 
                 <tr>
-                     <td><label>Dirección:</label></td>
-                     <td><label for="calle<%=cont%>">Calle</label></td>
-                     <td><input id="calle<%=cont%>"  value="" name="calle<%=cont%>" /></td>
-                     <td><label for="num<%=cont%>">Nº</label></td>
-                     <td><input id="num<%=cont%>"  value="" name="num<%=cont%>" /></td>
-                     <td><label for="cbxTipo<%=cont%>">Tipo.Dir:</label></td>
-                     <td>
-                         <select id="cbxTipo<%=cont%>" name="tipo<%=cont%>">
-                            <option>Casa</option>
-                            <option>Trabajo</option>
-                            <option>Otro</option>
-                        </select>
-                     </td>
+                     
                      <td><button type="button" onclick="addRows(<%=cont%>)">Add</button></td>
                  </tr>
                 </tbody>
 
                 <tr>
-                    <td><button type="submit">Editar</button></td>
+                    <td><button type="submit">Modificar</button></td>
                 </tr>
             </table>
             <%if(request.getAttribute("mensaje") != null){%>

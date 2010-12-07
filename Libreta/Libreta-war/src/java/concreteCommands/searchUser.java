@@ -75,7 +75,6 @@ public class searchUser implements Command {
 
         String outcome = "";
         try {
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
             if(!request.getParameter("idUsuario").equals("")){
                 this.id = Long.parseLong(request.getParameter("idUsuario"));
@@ -87,14 +86,13 @@ public class searchUser implements Command {
                 if(usr != null){
                 
                     //El usuario fue obtenido con exito
-                    Date fecha=usr.getFechaNacimiento();
 
                     request.setAttribute("nombre", usr.getNombre());
                     request.setAttribute("apellido", usr.getApellido());
                     request.setAttribute("usuario", usr.getCredencial().getLogin());
                     request.setAttribute("rol", usr.getCredencial().getRol().toString());
                     request.setAttribute("selectId", usr.getId().toString());
-                    request.setAttribute("fechaNacimiento", df.format(fecha));
+                    request.setAttribute("fechaNacimiento",usr.getFechaNacimiento());
                     String Rol=usr.getCredencial().getRol().toString();
 
                     //Me fijo el rol y lo paso por parametro para el combobox

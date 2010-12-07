@@ -16,7 +16,7 @@
     </head>
     <body>
         <h1>Editar usuario</h1>
-
+<!--
         <form id="buscarForm" action="SearchUser.cmd" method="get">
             <table>
                 <tr>
@@ -27,6 +27,7 @@
                 </tr>
             </table>
         </form>
+-->
         <br/>
         <form id="editForm" action="EditUser.cmd" method="get">
             <table>

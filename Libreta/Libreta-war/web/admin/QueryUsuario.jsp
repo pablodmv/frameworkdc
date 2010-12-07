@@ -19,6 +19,7 @@
     </head>
     <body>
         <h1>Consulta Usuarios</h1>
+        <h3>Utilice la busqueda para eliminar y/o borrar</h3>
 
         <form action="QueryUser.cmd" name="formulario" method="get">
 
@@ -41,6 +42,8 @@
                     <td><button type="submit">Buscar</button></td>
                 </tr>
             </table>
+            </form>
+
             <br/>
             <br/>
             <table border="1" width="400px" >
@@ -51,6 +54,7 @@
                     <th>Fecha.Nac</th>
                     <th>Usuario</th>
                     <th>Rol</th>
+                    <th>Accion</th>
                 </tr>
                 <%
                 if(request.getAttribute("listaUsuarios") != null){
@@ -65,6 +69,20 @@
                     <td><%=usr.getFechaNacimiento() %></td>
                     <td><%=usr.getCredencial().getLogin() %></td>
                     <td><%=usr.getCredencial().getRol() %></td>
+                    <td>
+                        <form id="buscarForm" action="SearchUser.cmd" method="get">
+                        <input id="action" type="hidden" value="edit" name="action"/>
+                        <input id="idUsuarios" type="hidden" value="<%=usr.getId() %>" name="idUsuario"/>
+                        <button type="submit">Editar</button>
+                        </form>
+
+                        <form id="buscarForm" action="SearchUser.cmd" method="get">
+                        <input id="action" type="hidden" value="delete" name="action"/>
+                        <input id="idUsuarios" type="hidden" value="<%=usr.getId() %>" name="idUsuario"/>
+                        <button type="submit">Borrar</button>
+                        </form>
+
+                    </td>
                 </tr>
                 <%}%>
                 <%}%>
@@ -74,6 +92,6 @@
             <%if(request.getAttribute("mensaje") != null){%>
             <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
             <%}%>
-        </form>
+        
     </body>
 </html>
