@@ -6,10 +6,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -22,6 +25,16 @@ public class Bitacora implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fechaHora;
+
+    @Column
+    private String tipoAccion;
+
+    @Column
+    private String userLogin;
+
     public Long getId() {
         return id;
     }
@@ -29,6 +42,31 @@ public class Bitacora implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Date getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(Date fechaHora) {
+        this.fechaHora = fechaHora;
+    }
+
+    public String getTipoAccion() {
+        return tipoAccion;
+    }
+
+    public void setTipoAccion(String tipoAccion) {
+        this.tipoAccion = tipoAccion;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
 
     @Override
     public int hashCode() {
