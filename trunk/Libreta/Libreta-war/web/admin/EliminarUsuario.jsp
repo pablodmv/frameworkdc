@@ -15,7 +15,7 @@
     </head>
     <body>
         <h1>Eliminar Usuario</h1>
-
+<!--
         <form id="buscarForm" action="SearchUser.cmd" method="get">
             <table>
                 <tr>
@@ -26,6 +26,7 @@
                 </tr>
             </table>
         </form>
+-->
         <br/>
         <form id="editForm" action="DeleteUser.cmd" method="get">
             <table>
@@ -70,5 +71,6 @@
             <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
             <%}%>
         </form>
+        <a href="javascript:window.history.back();">&laquo; Volver</a>
     </body>
 </html>

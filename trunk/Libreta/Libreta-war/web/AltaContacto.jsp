@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="js/agregarRows.js" type="text/javascript"></script>
+        <script src="js/validaciones.js" type="text/javascript"></script>
         <title>Administracion - Agregar Contacto</title>
     </head>
     <body>
@@ -41,7 +42,7 @@
                  </tr>
                  <tr>
                      <td><label for="email">EMail:</label></td>
-                     <td><input id="email" maxlength="10" value="" name="email" /></td>
+                     <td><input id="email" maxlength="40" value="" name="email" onchange="validarEmail(this.value,this);" /></td>
                  </tr>
 
                  <tr>
@@ -71,6 +72,7 @@
             <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
             <%}%>
         </form>
+        <a href="javascript:window.history.back();">&laquo; Volver</a>
 
     </body>
 </html>

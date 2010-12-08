@@ -131,6 +131,7 @@
             <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
             <%}%>
         </form>
+        <a href="javascript:window.history.back();">&laquo; Volver</a>
 
     </body>
 </html>

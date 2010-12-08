@@ -80,7 +80,7 @@ public class editUser implements Command {
         } catch (ParseException ex) {
             Logger.getLogger(addUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(ComandoConcreto.class.getName()).log(Level.SEVERE, "No se pudo encontrar el EJB", ex);
+            Logger.getLogger(addUser.class.getName()).log(Level.SEVERE, "No se pudo encontrar el EJB", ex);
         }
 
       return "";
