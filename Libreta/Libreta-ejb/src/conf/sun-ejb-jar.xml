@@ -13,5 +13,13 @@
         <jndi-name>jms/bitacoraLogger</jndi-name>
       </message-destination-ref>
     </ejb>
+    <ejb>
+      <ejb-name>ABMUsuario</ejb-name>
+      <jndi-name>ABMUsuario</jndi-name>
+    </ejb>
+    <ejb>
+      <ejb-name>ABMContacto</ejb-name>
+      <jndi-name>ABMContacto</jndi-name>
+    </ejb>
   </enterprise-beans>
 </sun-ejb-jar>
