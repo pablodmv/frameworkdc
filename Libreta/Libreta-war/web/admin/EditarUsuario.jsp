@@ -13,6 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Administracion - Editar Usuario</title>
         <script src="js/maskDate.js" type="text/javascript"></script>
+        <script src="js/validaciones.js" type="text/javascript"></script>
     </head>
     <body>
         <h1>Editar usuario</h1>
@@ -53,9 +54,9 @@
                  <tr>
                      <td><label for="fNac">Fecha Nacimiento:</label></td>
                      <% if(request.getAttribute("fechaNacimiento") != null){%>
-                     <td><input id="fNac"  value="<%=request.getAttribute("fechaNacimiento")%>" name="fNac"/></td>
+                     <td><input id="fNac" maxlength="10" value="<%=request.getAttribute("fechaNacimiento")%>" name="fNac" onFocus="javascript:vDateType='3'" onKeyUp="DateFormat(this,this.value,event,false,'3')" onBlur="DateFormat(this,this.value,event,false,'3')" onchange="validarFecha(this.value,this);"/></td>
                      <%}else{%>
-                     <td><input id="fNac"  value="" name="fNac"/></td>
+                     <td><input id="fNac" maxlength="10" value="" name="fNac" onFocus="javascript:vDateType='3'" onKeyUp="DateFormat(this,this.value,event,false,'3')" onBlur="DateFormat(this,this.value,event,false,'3')" onchange="validarFecha(this.value,this);"/></td>
                      <%}%>
                  </tr>
 
@@ -92,6 +93,6 @@
             <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
             <%}%>
         </form>
-
+<a href="javascript:window.history.back();">&laquo; Volver</a>
     </body>
 </html>

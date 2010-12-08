@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="js/maskDate.js" type="text/javascript"></script>
+        <script src="js/validaciones.js" type="text/javascript"></script>
         <title>Administracion - Agregar Usuario</title>
     </head>
     <body>
@@ -37,15 +38,14 @@
                  </tr>
                  <tr>
                      <td><label for="fNac">Fecha Nacimiento:</label></td>
-                     <td><input id="fNac" maxlength="10" value="" name="fNac" onFocus="javascript:vDateType='3'" onKeyUp="DateFormat(this,this.value,event,false,'3')" onBlur="DateFormat(this,this.value,event,false,'3')"/></td>
+                     <td><input id="fNac" maxlength="10" value="" name="fNac" onFocus="javascript:vDateType='3'" onKeyUp="DateFormat(this,this.value,event,false,'3')" onBlur="DateFormat(this,this.value,event,false,'3')" onchange="validarFecha(this.value,this);"/></td>
                  </tr>
                  <tr>
                      <td><label for="cbxRoles">Rol:</label></td>
                      <td>
                          <select id="cbxRoles" name="rol">
-                             <option>Seleccionar</option>
                             <option>Administrador</option>
-                            <option>Usuario</option>
+                            <option selected="true">Usuario</option>
                         </select>
 
                      </td>
@@ -58,5 +58,6 @@
             <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
             <%}%>
         </form>
+        <a href="javascript:window.history.back();">&laquo; Volver</a>
     </body>
 </html>

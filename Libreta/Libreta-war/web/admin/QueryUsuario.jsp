@@ -92,6 +92,6 @@
             <%if(request.getAttribute("mensaje") != null){%>
             <label id="mensaje"><%=request.getAttribute("mensaje")%></label>
             <%}%>
-        
+        <a href="javascript:window.history.back();">&laquo; Volver</a>
     </body>
 </html>
